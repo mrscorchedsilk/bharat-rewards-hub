@@ -8,6 +8,10 @@ import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/context/AuthContext";
 import Index from '@/pages/Index';
 import Dashboard from '@/pages/Dashboard';
+import DashboardHome from '@/pages/DashboardHome';
+import CurrentGiveaways from '@/pages/CurrentGiveaways';
+import PastGiveaways from '@/pages/PastGiveaways';
+import Cashback from '@/pages/Cashback';
 import NotFound from '@/pages/NotFound';
 
 import './App.css';
@@ -24,7 +28,15 @@ function App() {
             <div className="min-h-screen bg-background text-foreground">
               <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard />}>
+                  <Route index element={<DashboardHome />} />
+                  <Route path="giveaways/current" element={<CurrentGiveaways />} />
+                  <Route path="giveaways/past" element={<PastGiveaways />} />
+                  <Route path="cashback" element={<Cashback />} />
+                  <Route path="store" element={<div>Bharat Essentials Store Coming Soon</div>} />
+                  <Route path="gift-cards" element={<div>Gift Cards Coming Soon</div>} />
+                  <Route path="bulk-buying" element={<div>Bulk Buying Groups Coming Soon</div>} />
+                </Route>
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>

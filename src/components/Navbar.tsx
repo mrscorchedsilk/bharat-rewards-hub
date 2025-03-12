@@ -26,8 +26,8 @@ const Navbar = () => {
 
   const navItems: NavItem[] = [
     { name: "Home", path: "/" },
-    { name: "Gift Cards", path: "/gift-cards" },
-    { name: "Products", path: "/products" },
+    { name: "Gift Cards", path: "/dashboard/gift-cards" },
+    { name: "Products", path: "/dashboard/store" },
   ];
 
   // Add scroll event listener
@@ -109,6 +109,12 @@ const Navbar = () => {
                 <DropdownMenuItem asChild>
                   <Link to="/dashboard" className="cursor-pointer">Dashboard</Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/dashboard/cashback" className="cursor-pointer">Cashback Offers</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/dashboard/giveaways/current" className="cursor-pointer">Current Giveaways</Link>
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem 
                   onClick={logout}
@@ -165,6 +171,15 @@ const Navbar = () => {
               {item.name}
             </Link>
           ))}
+          
+          {isAuthenticated && (
+            <Link
+              to="/dashboard"
+              className="block py-2 text-base text-bharat-600 font-medium"
+            >
+              Dashboard
+            </Link>
+          )}
           
           {!isAuthenticated && (
             <Button 
