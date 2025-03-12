@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link, Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
@@ -51,9 +52,7 @@ const Dashboard = () => {
   }
 
   if (!isAuthenticated) {
-    return (
-      <Navigate to="/" replace={true} />;
-    );
+    return <Navigate to="/" replace={true} />;
   }
 
   const menuItems = [
