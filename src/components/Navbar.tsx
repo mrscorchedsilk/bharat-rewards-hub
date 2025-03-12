@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, User, LogOut } from "lucide-react";
@@ -62,7 +63,7 @@ const Navbar = () => {
             <span className="text-white font-bold text-lg">BR</span>
             <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-bharat-600 to-bharat-400 animate-pulse-slow opacity-70"></div>
           </div>
-          <span className="font-bold text-xl md:text-2xl bg-clip-text text-transparent bg-gradient-to-r from-bharat-700 to-bharat-500 dark:from-bharat-400 dark:to-bharat-600">
+          <span className="font-bold text-xl md:text-2xl bg-clip-text text-transparent bg-gradient-to-r from-bharat-700 to-bharat-500">
             Bharat Rewards
           </span>
         </Link>
@@ -75,25 +76,23 @@ const Navbar = () => {
                 to={item.path}
                 className={`font-medium text-base transition-all duration-300 relative group ${
                   location.pathname === item.path
-                    ? "text-bharat-600 dark:text-bharat-400"
-                    : "text-foreground hover:text-bharat-600 dark:hover:text-bharat-400"
+                    ? "text-bharat-600"
+                    : "text-foreground hover:text-bharat-600"
                 }`}
               >
                 {item.name}
-                <span className={`absolute bottom-0 left-0 w-0 h-0.5 bg-bharat-500 dark:bg-bharat-400 transition-all duration-300 group-hover:w-full ${
+                <span className={`absolute bottom-0 left-0 w-0 h-0.5 bg-bharat-500 transition-all duration-300 group-hover:w-full ${
                   location.pathname === item.path ? "w-full" : ""
                 }`} />
               </Link>
             ))}
           </div>
 
-          <ThemeToggle />
-
           {isAuthenticated ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="rounded-full h-10 w-10 bg-bharat-50 dark:bg-bharat-900/30">
-                  <User className="h-5 w-5 text-bharat-600 dark:text-bharat-400" />
+                <Button variant="ghost" size="icon" className="rounded-full h-10 w-10 bg-bharat-50">
+                  <User className="h-5 w-5 text-bharat-600" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56 mt-2 animate-fade-in">
@@ -111,7 +110,7 @@ const Navbar = () => {
                   <Link to="/dashboard/cashback" className="cursor-pointer">Cashback Offers</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/dashboard/giveaways/current" className="cursor-pointer">Current Giveaways</Link>
+                  <Link to="/dashboard/giveaways" className="cursor-pointer">Giveaways</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem 
@@ -126,7 +125,7 @@ const Navbar = () => {
           ) : (
             <Button 
               asChild
-              className="bg-bharat-600 hover:bg-bharat-700 text-white shadow-button transition-all duration-300 hover:shadow-lg dark:bg-bharat-500 dark:hover:bg-bharat-600"
+              className="bg-[#38b6ff] hover:bg-[#38b6ff]/90 text-white shadow-button transition-all duration-300 hover:shadow-lg"
             >
               <Link to="/dashboard">Login</Link>
             </Button>
@@ -134,12 +133,10 @@ const Navbar = () => {
         </div>
 
         <div className="md:hidden flex items-center space-x-2">
-          <ThemeToggle />
-          
           {isAuthenticated && (
             <Link to="/dashboard" className="mr-2">
-              <Button variant="ghost" size="icon" className="rounded-full h-9 w-9 bg-bharat-50 dark:bg-bharat-900/30">
-                <User className="h-4 w-4 text-bharat-600 dark:text-bharat-400" />
+              <Button variant="ghost" size="icon" className="rounded-full h-9 w-9 bg-bharat-50">
+                <User className="h-4 w-4 text-bharat-600" />
               </Button>
             </Link>
           )}
@@ -163,7 +160,7 @@ const Navbar = () => {
               to={item.path}
               className={`block py-2 text-base ${
                 location.pathname === item.path
-                  ? "text-bharat-600 dark:text-bharat-400 font-medium"
+                  ? "text-bharat-600 font-medium"
                   : "text-foreground"
               }`}
             >
@@ -174,7 +171,7 @@ const Navbar = () => {
           {isAuthenticated && (
             <Link
               to="/dashboard"
-              className="block py-2 text-base text-bharat-600 dark:text-bharat-400 font-medium"
+              className="block py-2 text-base text-bharat-600 font-medium"
             >
               Dashboard
             </Link>
@@ -183,7 +180,7 @@ const Navbar = () => {
           {!isAuthenticated && (
             <Button 
               asChild
-              className="w-full mt-4 bg-bharat-600 hover:bg-bharat-700 text-white dark:bg-bharat-500 dark:hover:bg-bharat-600"
+              className="w-full mt-4 bg-[#38b6ff] hover:bg-[#38b6ff]/90 text-white"
             >
               <Link to="/dashboard">Login</Link>
             </Button>
@@ -193,7 +190,7 @@ const Navbar = () => {
             <Button 
               onClick={logout}
               variant="outline" 
-              className="w-full mt-4 border-red-200 text-red-500 hover:bg-red-50 dark:border-red-900 dark:hover:bg-red-950/30"
+              className="w-full mt-4 border-red-200 text-red-500 hover:bg-red-50"
             >
               <LogOut className="mr-2 h-4 w-4" />
               <span>Log out</span>

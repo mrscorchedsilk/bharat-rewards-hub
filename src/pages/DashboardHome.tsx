@@ -1,5 +1,6 @@
+
 import { useAuth } from "@/context/AuthContext";
-import { Card } from "@/components/ui/card";
+import { Card, CardHeader, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
 import WalletCard from "@/components/WalletCard";
 import { Trophy, Gift, ShoppingBag, Percent, Users, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";

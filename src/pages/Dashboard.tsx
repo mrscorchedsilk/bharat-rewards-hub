@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
@@ -99,7 +98,7 @@ const Dashboard = () => {
     if (path.includes("bulk-buying")) return "bulk-buying";
     return "home";
   };
-
+  
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <div className="flex flex-1">
