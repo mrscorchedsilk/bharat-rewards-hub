@@ -1,7 +1,7 @@
-
 import { useAuth } from "@/context/AuthContext";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trophy, Gift, ShoppingBag, Percent, Users, Clock, IndianRupee, ArrowRight } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import WalletCard from "@/components/WalletCard";
+import { Trophy, Gift, ShoppingBag, Percent, Users, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -11,15 +11,41 @@ const DashboardHome = () => {
   return (
     <div className="space-y-6">
       <header className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2 fade-in-element" style={{ opacity: 0, transform: 'translateY(20px)', transition: 'all 0.5s ease' }}>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">
           Welcome to Your Dashboard
         </h1>
-        <p className="text-gray-600 fade-in-element" style={{ opacity: 0, transform: 'translateY(20px)', transition: 'all 0.5s ease' }}>
+        <p className="text-gray-600">
           Manage your rewards, cashback, and exclusive offers in one place
         </p>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2">
+          <Card className="p-6">
+            <h2 className="text-xl font-bold mb-4">Your Rewards Summary</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-[#38b6ff]/5 p-4 rounded-lg">
+                <p className="text-sm text-gray-600">Total Cashback Earned</p>
+                <p className="text-2xl font-bold text-[#38b6ff]">₹{user?.walletBalance.toFixed(2)}</p>
+              </div>
+              <div className="bg-gold-50 p-4 rounded-lg">
+                <p className="text-sm text-gray-600">Reward Points</p>
+                <p className="text-2xl font-bold text-gold-600">{user?.cashbackPoints} points</p>
+              </div>
+              <div className="bg-[#38b6ff]/5 p-4 rounded-lg">
+                <p className="text-sm text-gray-600">Giveaway Entries</p>
+                <p className="text-2xl font-bold text-[#38b6ff]">3 active</p>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        <div className="lg:col-span-1">
+          <WalletCard />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card className="hover:shadow-md transition-shadow fade-in-element" style={{ opacity: 0, transform: 'translateY(20px)', transition: 'all 0.5s ease' }}>
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center">
@@ -181,32 +207,6 @@ const DashboardHome = () => {
           </CardContent>
         </Card>
       </div>
-
-      <Card className="fade-in-element" style={{ opacity: 0, transform: 'translateY(20px)', transition: 'all 0.5s ease' }}>
-        <CardHeader className="pb-2">
-          <CardTitle className="flex items-center">
-            <IndianRupee className="mr-2 h-5 w-5 text-green-600" />
-            Your Rewards Summary
-          </CardTitle>
-          <CardDescription>Track your earnings and rewards</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-green-50 p-4 rounded-lg">
-              <p className="text-sm text-gray-600">Total Cashback Earned</p>
-              <p className="text-2xl font-bold text-green-600">₹{user?.walletBalance.toFixed(2)}</p>
-            </div>
-            <div className="bg-gold-50 p-4 rounded-lg">
-              <p className="text-sm text-gray-600">Reward Points</p>
-              <p className="text-2xl font-bold text-gold-600">{user?.cashbackPoints} points</p>
-            </div>
-            <div className="bg-bharat-50 p-4 rounded-lg">
-              <p className="text-sm text-gray-600">Giveaway Entries</p>
-              <p className="text-2xl font-bold text-bharat-600">3 active</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 };

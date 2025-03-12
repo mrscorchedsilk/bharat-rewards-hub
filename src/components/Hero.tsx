@@ -1,4 +1,3 @@
-
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -6,9 +5,8 @@ import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <div className="relative min-h-[90vh] flex items-center overflow-hidden pt-20">
-      {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-20 right-10 w-72 h-72 bg-bharat-400/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 right-10 w-72 h-72 bg-[#38b6ff]/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 left-10 w-72 h-72 bg-gold-300/10 rounded-full blur-3xl"></div>
       </div>
       
@@ -17,13 +15,13 @@ const Hero = () => {
           <div className="w-full lg:w-1/2 space-y-8">
             <div className="space-y-4 max-w-xl">
               <div className="inline-block">
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-bharat-100 text-bharat-800 slide-up">
-                  Introducing Bharat Rewards
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-[#38b6ff]/10 text-[#38b6ff] slide-up">
+                  Introducing Bharat Rewards - 18,000+ Members joined today
                 </span>
               </div>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-balance fade-in-delay-1">
-                Earn <span className="text-bharat-600">Rewards</span> on Everything You Buy
+                India's Fastest Growing <span className="text-[#38b6ff]">Rewards Club</span>
               </h1>
               
               <p className="text-lg text-gray-600 fade-in-delay-2">
@@ -35,7 +33,7 @@ const Hero = () => {
               <Button 
                 asChild
                 size="lg" 
-                className="bg-bharat-600 hover:bg-bharat-700 text-white shadow-button transition-all duration-300 hover:shadow-lg hover:translate-y-[-2px]"
+                className="bg-[#38b6ff] hover:bg-[#38b6ff]/90 text-white shadow-button transition-all duration-300 hover:shadow-lg hover:translate-y-[-2px]"
               >
                 <Link to="/dashboard">
                   Join Now
@@ -47,7 +45,7 @@ const Hero = () => {
                 asChild
                 variant="outline" 
                 size="lg" 
-                className="border-bharat-200 bg-white hover:bg-bharat-50 text-bharat-700 transition-all duration-300"
+                className="border-[#38b6ff]/20 bg-white hover:bg-[#38b6ff]/5 text-[#38b6ff] transition-all duration-300"
               >
                 <Link to="/gift-cards">
                   Explore Gift Cards
@@ -56,20 +54,8 @@ const Hero = () => {
             </div>
             
             <div className="pt-6 fade-in-delay-3">
-              <div className="flex items-center justify-start space-x-6">
-                <div className="flex -space-x-3">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="w-10 h-10 rounded-full bg-gradient-to-b from-bharat-100 to-bharat-200 border-2 border-white flex items-center justify-center shadow-sm">
-                      <span className="text-xs font-medium text-bharat-700">
-                        {String.fromCharCode(64 + i)}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-                
-                <div className="text-sm text-gray-600">
-                  <span className="font-semibold text-gray-900">10,000+</span> members already joined
-                </div>
+              <div className="text-sm text-gray-600">
+                <span className="font-semibold text-gray-900">18,000+</span> members already joined
               </div>
             </div>
           </div>
@@ -143,7 +129,6 @@ const Hero = () => {
               </div>
             </div>
             
-            {/* Decorative elements */}
             <div className="absolute -top-10 -right-10 w-40 h-40 bg-gold-400/20 rounded-full blur-2xl"></div>
             <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-bharat-400/20 rounded-full blur-2xl"></div>
           </div>

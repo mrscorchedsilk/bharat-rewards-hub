@@ -1,10 +1,8 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
-import ThemeToggle from "@/components/ThemeToggle";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,12 +24,12 @@ const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth();
 
   const navItems: NavItem[] = [
-    { name: "Home", path: "/" },
-    { name: "Gift Cards", path: "/dashboard/gift-cards" },
-    { name: "Products", path: "/dashboard/store" },
+    { name: "Rewards", path: "/rewards" },
+    { name: "Pricing", path: "/#pricing" },
+    { name: "About", path: "/about" },
+    { name: "FAQs", path: "/faqs" },
   ];
 
-  // Add scroll event listener
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 20) {
@@ -45,7 +43,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close menu when route changes
   useEffect(() => {
     setIsOpen(false);
   }, [location]);
@@ -57,7 +54,6 @@ const Navbar = () => {
       }`}
     >
       <nav className="container mx-auto px-4 md:px-6 flex justify-between items-center">
-        {/* Logo */}
         <Link 
           to="/" 
           className="flex items-center space-x-2 transition-transform duration-300 hover:scale-105"
@@ -71,7 +67,6 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           <div className="flex space-x-6">
             {navItems.map((item) => (
@@ -138,7 +133,6 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Mobile menu button */}
         <div className="md:hidden flex items-center space-x-2">
           <ThemeToggle />
           
@@ -161,7 +155,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile menu */}
       {isOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-background/95 backdrop-blur-lg shadow-md py-4 px-4 space-y-4 animate-fade-in">
           {navItems.map((item) => (
