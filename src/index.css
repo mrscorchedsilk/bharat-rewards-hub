@@ -36,6 +36,54 @@
     --ring: 222.2 84% 32.9%;
 
     --radius: 0.75rem;
+    
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 210 40% 12%;
+    --sidebar-primary: 210 100% 30%;
+    --sidebar-primary-foreground: 210 20% 98%;
+    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent-foreground: 210 40% 12%;
+    --sidebar-border: 214.3 31.8% 91.4%;
+    --sidebar-ring: 222.2 84% 32.9%;
+  }
+
+  .dark {
+    --background: 210 50% 5%;
+    --foreground: 210 40% 98%;
+
+    --card: 210 40% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 210 40% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 100% 50%;
+    --primary-foreground: 210 20% 98%;
+
+    --secondary: 184 89% 40%;
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 210 20% 15%;
+    --muted-foreground: 210 20% 70%;
+
+    --accent: 38 92% 50%;
+    --accent-foreground: 38 60% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 210 40% 18%;
+    --input: 210 40% 18%;
+    --ring: 210 100% 50%;
+    
+    --sidebar-background: 210 40% 10%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 210 100% 50%;
+    --sidebar-primary-foreground: 210 20% 98%;
+    --sidebar-accent: 210 40% 15%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 210 40% 18%;
+    --sidebar-ring: 210 100% 50%;
   }
 
   * {
@@ -56,11 +104,11 @@
 
 @layer components {
   .glass-card {
-    @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-glass;
+    @apply bg-white/80 dark:bg-white/10 backdrop-blur-sm border border-white/20 dark:border-white/10 shadow-glass;
   }
   
   .glass-panel {
-    @apply bg-white/60 backdrop-blur-md border border-white/30 shadow-glass-lg;
+    @apply bg-white/60 dark:bg-black/40 backdrop-blur-md border border-white/30 dark:border-white/10 shadow-glass-lg;
   }
   
   .text-balance {
@@ -68,7 +116,7 @@
   }
   
   .shimmer {
-    @apply bg-gradient-to-r from-transparent via-white/30 to-transparent bg-[length:200%_100%] animate-shimmer;
+    @apply bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent bg-[length:200%_100%] animate-shimmer;
   }
 }
 
