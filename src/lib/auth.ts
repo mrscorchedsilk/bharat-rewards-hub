@@ -1,0 +1,51 @@
+
+import { toast } from "sonner";
+
+// Mock user type
+export interface User {
+  id: string;
+  email: string;
+  name?: string;
+  walletBalance: number;
+  cashbackPoints: number;
+}
+
+// Mock authentication function - in real app, this would connect to a backend
+export const sendOTP = async (email: string): Promise<boolean> => {
+  // Simulate API call
+  await new Promise(resolve => setTimeout(resolve, 1500));
+  
+  // In a real app, this would send an actual email with OTP
+  console.log(`OTP sent to ${email}`);
+  toast.success(`OTP sent to ${email}`);
+  return true;
+};
+
+// Mock OTP verification
+export const verifyOTP = async (email: string, otp: string): Promise<User | null> => {
+  // Simulate API call
+  await new Promise(resolve => setTimeout(resolve, 1500));
+  
+  // For demo purposes, any 6-digit OTP works
+  if (otp.length === 6 && /^\d+$/.test(otp)) {
+    // Create a mock user
+    const mockUser: User = {
+      id: `user-${Math.random().toString(36).substring(2, 9)}`,
+      email,
+      walletBalance: Math.floor(Math.random() * 1000),
+      cashbackPoints: Math.floor(Math.random() * 100)
+    };
+    
+    toast.success("Login successful!");
+    return mockUser;
+  }
+  
+  toast.error("Invalid OTP. Please try again.");
+  return null;
+};
+
+// Logout function
+export const logout = (): void => {
+  localStorage.removeItem("bharat_user");
+  toast.info("Logged out successfully");
+};
