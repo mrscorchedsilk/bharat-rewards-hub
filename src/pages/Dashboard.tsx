@@ -15,7 +15,10 @@ import {
   Home,
   History,
   UserCog,
-  LogOut
+  LogOut,
+  Award,
+  Coins,
+  Trophy
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -113,7 +116,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      {/* Header with profile icon */}
+      {/* Header - simplified without profile icon */}
       <header className="w-full bg-white border-b border-gray-200 py-3 px-4 fixed top-0 left-0 z-20">
         <div className="container mx-auto flex justify-between items-center">
           <div>
@@ -128,46 +131,8 @@ const Dashboard = () => {
               </Button>
             )}
           </div>
-          <div>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="rounded-full h-10 w-10 bg-bharat-50">
-                  <span className="text-bharat-600 font-medium text-sm">
-                    {user?.email ? user.email.charAt(0).toUpperCase() : "U"}
-                  </span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 mt-2 animate-fade-in">
-                <DropdownMenuLabel className="font-normal">
-                  <div className="flex flex-col space-y-1">
-                    <p className="font-medium text-sm">{user?.email}</p>
-                    <p className="text-xs text-muted-foreground">Rewards Member</p>
-                  </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link to="/dashboard/profile" className="cursor-pointer flex items-center">
-                    <UserCog className="mr-2 h-4 w-4" />
-                    <span>Profile Settings</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/dashboard/transactions" className="cursor-pointer flex items-center">
-                    <History className="mr-2 h-4 w-4" />
-                    <span>Transaction History</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem 
-                  onClick={logout}
-                  className="text-red-500 focus:text-red-500 cursor-pointer"
-                >
-                  <LogOut className="mr-2 h-4 w-4" />
-                  <span>Sign out</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+          {/* Header right side is now empty */}
+          <div></div>
         </div>
       </header>
 
@@ -232,10 +197,149 @@ const Dashboard = () => {
               ))}
             </ul>
           </nav>
+
+          {/* Rewards Summary Section */}
+          <div className={`px-4 py-3 ${isCollapsed ? 'items-center' : ''}`}>
+            <Separator className="mb-3" />
+            
+            {!isCollapsed ? (
+              <>
+                <h3 className="text-sm font-semibold text-gray-700 mb-3">Your Rewards Summary</h3>
+                <div className="grid grid-cols-1 gap-2 mb-3">
+                  <div className="bg-[#38b6ff]/5 p-2 rounded-lg">
+                    <div className="flex items-center">
+                      <Award className="h-4 w-4 text-[#38b6ff] mr-2" />
+                      <div>
+                        <p className="text-xs text-gray-600">Total Cashback</p>
+                        <p className="text-sm font-bold text-[#38b6ff]">₹{user?.walletBalance.toFixed(2)}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-gold-50 p-2 rounded-lg">
+                    <div className="flex items-center">
+                      <Coins className="h-4 w-4 text-gold-600 mr-2" />
+                      <div>
+                        <p className="text-xs text-gray-600">Reward Points</p>
+                        <p className="text-sm font-bold text-gold-600">{user?.cashbackPoints} pts</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-[#38b6ff]/5 p-2 rounded-lg">
+                    <div className="flex items-center">
+                      <Trophy className="h-4 w-4 text-[#38b6ff] mr-2" />
+                      <div>
+                        <p className="text-xs text-gray-600">Giveaway Entries</p>
+                        <p className="text-sm font-bold text-[#38b6ff]">3 active</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="flex flex-col items-center space-y-4 mb-3">
+                <div className="flex flex-col items-center">
+                  <Award className="h-5 w-5 text-[#38b6ff]" />
+                  <p className="text-xs font-semibold mt-1">₹{user?.walletBalance.toFixed(2)}</p>
+                </div>
+                <div className="flex flex-col items-center">
+                  <Coins className="h-5 w-5 text-gold-600" />
+                  <p className="text-xs font-semibold mt-1">{user?.cashbackPoints}</p>
+                </div>
+                <div className="flex flex-col items-center">
+                  <Trophy className="h-5 w-5 text-[#38b6ff]" />
+                  <p className="text-xs font-semibold mt-1">3</p>
+                </div>
+              </div>
+            )}
+            
+            <Separator className="mb-3" />
+          </div>
+
+          {/* User Profile Section */}
+          <div className="mt-auto p-4">
+            {!isCollapsed ? (
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-full bg-bharat-100 flex items-center justify-center">
+                  <span className="text-bharat-600 font-medium">
+                    {user?.email ? user.email.charAt(0).toUpperCase() : "U"}
+                  </span>
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm font-medium truncate">{user?.name || user?.email}</p>
+                  <p className="text-xs text-muted-foreground">Rewards Member</p>
+                </div>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon" className="h-8 w-8">
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56">
+                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link to="/dashboard/profile" className="cursor-pointer">
+                        <UserCog className="mr-2 h-4 w-4" />
+                        <span>Profile Settings</span>
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to="/dashboard/transactions" className="cursor-pointer">
+                        <History className="mr-2 h-4 w-4" />
+                        <span>Transaction History</span>
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem 
+                      onClick={logout}
+                      className="text-red-500 focus:text-red-500 cursor-pointer"
+                    >
+                      <LogOut className="mr-2 h-4 w-4" />
+                      <span>Sign out</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-bharat-100">
+                      <span className="text-bharat-600 font-medium">
+                        {user?.email ? user.email.charAt(0).toUpperCase() : "U"}
+                      </span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56">
+                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link to="/dashboard/profile" className="cursor-pointer">
+                        <UserCog className="mr-2 h-4 w-4" />
+                        <span>Profile Settings</span>
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to="/dashboard/transactions" className="cursor-pointer">
+                        <History className="mr-2 h-4 w-4" />
+                        <span>Transaction History</span>
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem 
+                      onClick={logout}
+                      className="text-red-500 focus:text-red-500 cursor-pointer"
+                    >
+                      <LogOut className="mr-2 h-4 w-4" />
+                      <span>Sign out</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            )}
+          </div>
         </aside>
 
-        {/* Mobile sidebar toggle - remove since we now have the header */}
-        
         {/* Mobile tabs */}
         {isMobile && (
           <div className="fixed bottom-0 left-0 right-0 z-20 bg-white border-t border-gray-200 py-1 px-2">

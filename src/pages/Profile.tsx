@@ -12,7 +12,7 @@ const Profile = () => {
   const [formData, setFormData] = useState({
     name: user?.name || "",
     email: user?.email || "",
-    phone: "",
+    phone: user?.phone || "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +27,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="container max-w-3xl mx-auto py-6">
+    <div className="max-w-3xl mx-auto">
       <h1 className="text-2xl font-bold mb-6">Profile Settings</h1>
       
       <Card>
