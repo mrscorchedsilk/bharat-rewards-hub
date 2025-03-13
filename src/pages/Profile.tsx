@@ -12,7 +12,7 @@ const Profile = () => {
   const [formData, setFormData] = useState({
     name: user?.name || "",
     email: user?.email || "",
-    phone: user?.phone || "",
+    phone: user?.phoneNumber || "", // Fixed property name to match user type
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

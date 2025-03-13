@@ -116,27 +116,9 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      {/* Header - simplified without profile icon */}
-      <header className="w-full bg-white border-b border-gray-200 py-3 px-4 fixed top-0 left-0 z-20">
-        <div className="container mx-auto flex justify-between items-center">
-          <div>
-            {isMobile && !sidebarOpen && (
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                onClick={() => setSidebarOpen(true)}
-                className="mr-2"
-              >
-                <Menu className="h-5 w-5" />
-              </Button>
-            )}
-          </div>
-          {/* Header right side is now empty */}
-          <div></div>
-        </div>
-      </header>
-
-      <div className="flex flex-1 pt-16">
+      {/* Removed the header that was causing formatting issues */}
+      
+      <div className="flex flex-1">
         {/* Sidebar */}
         <aside 
           className={`fixed lg:relative z-10 ${
@@ -340,6 +322,18 @@ const Dashboard = () => {
           </div>
         </aside>
 
+        {/* Mobile menu toggle button */}
+        {isMobile && !sidebarOpen && (
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={() => setSidebarOpen(true)}
+            className="fixed top-4 left-4 z-10"
+          >
+            <Menu className="h-5 w-5" />
+          </Button>
+        )}
+
         {/* Mobile tabs */}
         {isMobile && (
           <div className="fixed bottom-0 left-0 right-0 z-20 bg-white border-t border-gray-200 py-1 px-2">
@@ -376,7 +370,7 @@ const Dashboard = () => {
         
         {/* Main content */}
         <main className={`flex-1 p-4 md:p-6 lg:p-8 ${isMobile && sidebarOpen ? "opacity-25" : "opacity-100"} transition-opacity
-          ${isMobile ? "pb-20" : ""}`}>
+          ${isMobile ? "pb-20" : ""} overflow-y-auto h-screen`}>
           <Outlet />
         </main>
       </div>
