@@ -15,6 +15,8 @@ import Dashboard from '@/pages/Dashboard';
 import DashboardHome from '@/pages/DashboardHome';
 import Cashback from '@/pages/Cashback';
 import Giveaways from '@/pages/Giveaways';
+import Profile from '@/pages/Profile';
+import TransactionHistory from '@/pages/TransactionHistory';
 
 const queryClient = new QueryClient();
 
@@ -38,6 +40,8 @@ function App() {
                   <Route path="store" element={<div>Bharat Essentials Store Coming Soon</div>} />
                   <Route path="gift-cards" element={<div>Gift Cards Coming Soon</div>} />
                   <Route path="bulk-buying" element={<div>Bulk Buying Groups Coming Soon</div>} />
+                  <Route path="profile" element={<Profile />} />
+                  <Route path="transactions" element={<TransactionHistory />} />
                 </Route>
               </Routes>
               <Toaster />

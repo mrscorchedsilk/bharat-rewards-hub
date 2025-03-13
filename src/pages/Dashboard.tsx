@@ -12,14 +12,25 @@ import {
   ChevronRight,
   ArrowLeft,
   ArrowRight,
-  Home
+  Home,
+  History,
+  UserCog,
+  LogOut
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Dashboard = () => {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, user, logout } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -102,7 +113,65 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      <div className="flex flex-1">
+      {/* Header with profile icon */}
+      <header className="w-full bg-white border-b border-gray-200 py-3 px-4 fixed top-0 left-0 z-20">
+        <div className="container mx-auto flex justify-between items-center">
+          <div>
+            {isMobile && !sidebarOpen && (
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                onClick={() => setSidebarOpen(true)}
+                className="mr-2"
+              >
+                <Menu className="h-5 w-5" />
+              </Button>
+            )}
+          </div>
+          <div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="rounded-full h-10 w-10 bg-bharat-50">
+                  <span className="text-bharat-600 font-medium text-sm">
+                    {user?.email ? user.email.charAt(0).toUpperCase() : "U"}
+                  </span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56 mt-2 animate-fade-in">
+                <DropdownMenuLabel className="font-normal">
+                  <div className="flex flex-col space-y-1">
+                    <p className="font-medium text-sm">{user?.email}</p>
+                    <p className="text-xs text-muted-foreground">Rewards Member</p>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link to="/dashboard/profile" className="cursor-pointer flex items-center">
+                    <UserCog className="mr-2 h-4 w-4" />
+                    <span>Profile Settings</span>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/dashboard/transactions" className="cursor-pointer flex items-center">
+                    <History className="mr-2 h-4 w-4" />
+                    <span>Transaction History</span>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem 
+                  onClick={logout}
+                  className="text-red-500 focus:text-red-500 cursor-pointer"
+                >
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span>Sign out</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </div>
+      </header>
+
+      <div className="flex flex-1 pt-16">
         {/* Sidebar */}
         <aside 
           className={`fixed lg:relative z-10 ${
@@ -165,16 +234,8 @@ const Dashboard = () => {
           </nav>
         </aside>
 
-        {/* Mobile sidebar toggle */}
-        {isMobile && !sidebarOpen && (
-          <button
-            onClick={() => setSidebarOpen(true)}
-            className="fixed z-20 bottom-4 left-4 bg-[#38b6ff] text-white rounded-full p-3 shadow-lg transition-all hover:bg-[#38b6ff]/90"
-          >
-            <Menu className="h-6 w-6" />
-          </button>
-        )}
-
+        {/* Mobile sidebar toggle - remove since we now have the header */}
+        
         {/* Mobile tabs */}
         {isMobile && (
           <div className="fixed bottom-0 left-0 right-0 z-20 bg-white border-t border-gray-200 py-1 px-2">
