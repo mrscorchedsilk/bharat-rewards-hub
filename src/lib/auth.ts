@@ -9,7 +9,22 @@ export interface User {
   phoneNumber?: string;
   walletBalance: number;
   cashbackPoints: number;
+  profilePicture?: string;
 }
+
+// Get currently logged in user (if any)
+export const getCurrentUser = (): User | null => {
+  const savedUser = localStorage.getItem("bharat_user");
+  if (savedUser) {
+    try {
+      return JSON.parse(savedUser);
+    } catch (error) {
+      console.error("Failed to parse user data", error);
+      localStorage.removeItem("bharat_user");
+    }
+  }
+  return null;
+};
 
 // Mock authentication function - in real app, this would connect to a backend
 export const sendOTP = async (email: string): Promise<boolean> => {

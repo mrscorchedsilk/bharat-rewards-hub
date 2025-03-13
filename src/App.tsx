@@ -11,6 +11,7 @@ import Rewards from '@/pages/Rewards';
 import Pricing from '@/pages/Pricing';
 import About from '@/pages/About';
 import FAQs from '@/pages/FAQs';
+import Login from '@/pages/Login';
 import Dashboard from '@/pages/Dashboard';
 import DashboardHome from '@/pages/DashboardHome';
 import Cashback from '@/pages/Cashback';
@@ -33,6 +34,7 @@ function App() {
                 <Route path="/pricing" element={<Pricing />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/faqs" element={<FAQs />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />}>
                   <Route index element={<DashboardHome />} />
                   <Route path="cashback" element={<Cashback />} />

@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -89,7 +90,7 @@ const Rewards = () => {
   ];
 
   const handleJoinNowClick = () => {
-    navigate("/dashboard");
+    navigate("/login");
   };
 
   return (

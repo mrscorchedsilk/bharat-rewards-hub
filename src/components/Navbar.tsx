@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, User, LogOut } from "lucide-react";
@@ -49,7 +50,7 @@ const Navbar = () => {
   }, [location]);
 
   const handleSignInClick = () => {
-    navigate("/dashboard");
+    navigate("/login");
   };
 
   return (
