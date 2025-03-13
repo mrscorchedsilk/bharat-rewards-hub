@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
@@ -22,6 +21,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const { user, isAuthenticated, logout } = useAuth();
 
   const navItems: NavItem[] = [
@@ -47,6 +47,10 @@ const Navbar = () => {
   useEffect(() => {
     setIsOpen(false);
   }, [location]);
+
+  const handleSignInClick = () => {
+    navigate("/dashboard");
+  };
 
   return (
     <header
@@ -124,10 +128,10 @@ const Navbar = () => {
             </DropdownMenu>
           ) : (
             <Button 
-              asChild
+              onClick={handleSignInClick}
               className="bg-[#38b6ff] hover:bg-[#38b6ff]/90 text-white shadow-button transition-all duration-300 hover:shadow-lg"
             >
-              <Link to="/dashboard">Sign In</Link>
+              Sign In
             </Button>
           )}
         </div>
@@ -179,10 +183,10 @@ const Navbar = () => {
           
           {!isAuthenticated && (
             <Button 
-              asChild
+              onClick={handleSignInClick}
               className="w-full mt-4 bg-[#38b6ff] hover:bg-[#38b6ff]/90 text-white"
             >
-              <Link to="/dashboard">Sign In</Link>
+              Sign In
             </Button>
           )}
           

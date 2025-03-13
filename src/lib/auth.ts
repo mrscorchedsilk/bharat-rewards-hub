@@ -49,4 +49,6 @@ export const verifyOTP = async (email: string, otp: string): Promise<User | null
 export const logout = (): void => {
   localStorage.removeItem("bharat_user");
   toast.info("Logged out successfully");
+  // Forcing a page reload to ensure clean state after logout
+  window.location.href = "/";
 };

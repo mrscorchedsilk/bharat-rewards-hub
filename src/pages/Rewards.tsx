@@ -1,12 +1,12 @@
-
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { ArrowRight, ShoppingBag, Gift, Users, ExternalLink, BadgePercent } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "react-router-dom";
 
 const Rewards = () => {
+  const navigate = useNavigate();
   const cashbackPartners = [
     {
       name: "Amazon",
@@ -88,6 +88,10 @@ const Rewards = () => {
     }
   ];
 
+  const handleJoinNowClick = () => {
+    navigate("/dashboard");
+  };
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -104,14 +108,12 @@ const Rewards = () => {
                 Earn cashback, access premium gift cards, and join our powerful bulk buying groups
               </p>
               <Button 
-                asChild
+                onClick={handleJoinNowClick}
                 size="lg"
                 className="bg-white text-bharat-800 hover:bg-gray-100"
               >
-                <Link to="/dashboard">
-                  Join Now
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
+                Join Now
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
           </div>
