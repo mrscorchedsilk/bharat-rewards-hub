@@ -7,11 +7,14 @@ import { Toaster } from "@/components/ui/sonner";
 
 import { AuthProvider } from "@/context/AuthContext";
 import Index from '@/pages/Index';
+import Rewards from '@/pages/Rewards';
+import Pricing from '@/pages/Pricing';
+import About from '@/pages/About';
+import FAQs from '@/pages/FAQs';
 import Dashboard from '@/pages/Dashboard';
 import DashboardHome from '@/pages/DashboardHome';
 import Cashback from '@/pages/Cashback';
 import Giveaways from '@/pages/Giveaways';
-import Pricing from '@/components/Pricing';
 
 const queryClient = new QueryClient();
 
@@ -24,6 +27,10 @@ function App() {
             <div className="min-h-screen bg-white text-gray-900">
               <Routes>
                 <Route path="/" element={<Index />} />
+                <Route path="/rewards" element={<Rewards />} />
+                <Route path="/pricing" element={<Pricing />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/faqs" element={<FAQs />} />
                 <Route path="/dashboard" element={<Dashboard />}>
                   <Route index element={<DashboardHome />} />
                   <Route path="cashback" element={<Cashback />} />

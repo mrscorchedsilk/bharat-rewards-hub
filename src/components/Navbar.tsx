@@ -26,7 +26,7 @@ const Navbar = () => {
 
   const navItems: NavItem[] = [
     { name: "Rewards", path: "/rewards" },
-    { name: "Pricing", path: "/#pricing" },
+    { name: "Pricing", path: "/pricing" },
     { name: "About", path: "/about" },
     { name: "FAQs", path: "/faqs" },
   ];
@@ -127,7 +127,7 @@ const Navbar = () => {
               asChild
               className="bg-[#38b6ff] hover:bg-[#38b6ff]/90 text-white shadow-button transition-all duration-300 hover:shadow-lg"
             >
-              <Link to="/dashboard">Login</Link>
+              <Link to="/dashboard">Sign In</Link>
             </Button>
           )}
         </div>
@@ -182,7 +182,7 @@ const Navbar = () => {
               asChild
               className="w-full mt-4 bg-[#38b6ff] hover:bg-[#38b6ff]/90 text-white"
             >
-              <Link to="/dashboard">Login</Link>
+              <Link to="/dashboard">Sign In</Link>
             </Button>
           )}
           

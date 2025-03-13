@@ -1,7 +1,7 @@
-
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
+import Pricing from "@/components/Pricing";
 import { ArrowRight, Gift, ShoppingBag, IndianRupee } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -14,6 +14,7 @@ const Index = () => {
       <main>
         <Hero />
         <Features />
+        <Pricing />
         
         {/* How It Works Section */}
         <section className="py-20 bg-gradient-to-b from-bharat-50/30 to-white">
@@ -112,8 +113,8 @@ const Index = () => {
                   variant="outline"
                   className="bg-transparent border-white text-white hover:bg-white/10"
                 >
-                  <Link to="/gift-cards">
-                    Explore Gift Cards
+                  <Link to="/rewards">
+                    Explore Rewards
                   </Link>
                 </Button>
               </div>
@@ -144,18 +145,20 @@ const Index = () => {
                   <h4 className="font-semibold mb-4">Pages</h4>
                   <ul className="space-y-2 text-sm">
                     <li><Link to="/" className="text-gray-600 hover:text-bharat-600">Home</Link></li>
-                    <li><Link to="/dashboard" className="text-gray-600 hover:text-bharat-600">Dashboard</Link></li>
-                    <li><Link to="/gift-cards" className="text-gray-600 hover:text-bharat-600">Gift Cards</Link></li>
-                    <li><Link to="/products" className="text-gray-600 hover:text-bharat-600">Products</Link></li>
+                    <li><Link to="/rewards" className="text-gray-600 hover:text-bharat-600">Rewards</Link></li>
+                    <li><Link to="/pricing" className="text-gray-600 hover:text-bharat-600">Pricing</Link></li>
+                    <li><Link to="/about" className="text-gray-600 hover:text-bharat-600">About</Link></li>
+                    <li><Link to="/faqs" className="text-gray-600 hover:text-bharat-600">FAQs</Link></li>
                   </ul>
                 </div>
                 
                 <div>
-                  <h4 className="font-semibold mb-4">Legal</h4>
+                  <h4 className="font-semibold mb-4">Features</h4>
                   <ul className="space-y-2 text-sm">
-                    <li><a href="#" className="text-gray-600 hover:text-bharat-600">Terms of Service</a></li>
-                    <li><a href="#" className="text-gray-600 hover:text-bharat-600">Privacy Policy</a></li>
-                    <li><a href="#" className="text-gray-600 hover:text-bharat-600">Refund Policy</a></li>
+                    <li><Link to="/rewards" className="text-gray-600 hover:text-bharat-600">Cashback</Link></li>
+                    <li><Link to="/dashboard/gift-cards" className="text-gray-600 hover:text-bharat-600">Gift Cards</Link></li>
+                    <li><Link to="/dashboard/bulk-buying" className="text-gray-600 hover:text-bharat-600">Bulk Buying</Link></li>
+                    <li><Link to="/dashboard/giveaways" className="text-gray-600 hover:text-bharat-600">Giveaways</Link></li>
                   </ul>
                 </div>
                 
@@ -164,6 +167,8 @@ const Index = () => {
                   <ul className="space-y-2 text-sm">
                     <li className="text-gray-600">support@bharatrewards.com</li>
                     <li className="text-gray-600">+91 1234567890</li>
+                    <li><Link to="/about" className="text-gray-600 hover:text-bharat-600">About Us</Link></li>
+                    <li><Link to="/faqs" className="text-gray-600 hover:text-bharat-600">FAQs</Link></li>
                   </ul>
                 </div>
               </div>
