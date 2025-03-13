@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,6 +14,8 @@ const Profile = () => {
     email: user?.email || "",
     phone: user?.phoneNumber || "", // Fixed property name to match user type
   });
+  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -24,6 +26,27 @@ const Profile = () => {
     e.preventDefault();
     // In a real app, you would update the user profile in your backend
     toast.success("Profile updated successfully!");
+  };
+
+  const handlePhotoClick = () => {
+    // Trigger file input click when the "Change Photo" button is clicked
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          setProfileImage(event.target.result as string);
+          toast.success("Profile photo updated!");
+        }
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -40,13 +63,30 @@ const Profile = () => {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="flex items-center gap-8 mb-6">
-              <div className="w-20 h-20 bg-bharat-100 rounded-full flex items-center justify-center text-bharat-600 text-xl font-semibold border-2 border-bharat-200">
-                {formData.name ? formData.name.charAt(0).toUpperCase() : formData.email.charAt(0).toUpperCase()}
+              <div className="w-20 h-20 bg-bharat-100 rounded-full flex items-center justify-center text-bharat-600 text-xl font-semibold border-2 border-bharat-200 overflow-hidden">
+                {profileImage ? (
+                  <img src={profileImage} alt="Profile" className="w-full h-full object-cover" />
+                ) : (
+                  formData.name ? formData.name.charAt(0).toUpperCase() : formData.email.charAt(0).toUpperCase()
+                )}
               </div>
               <div>
                 <h3 className="font-medium">Profile Photo</h3>
                 <p className="text-sm text-gray-500">This will be displayed on your account</p>
-                <Button variant="outline" size="sm" className="mt-2">
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  accept="image/*"
+                  className="hidden"
+                />
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="mt-2"
+                  type="button"
+                  onClick={handlePhotoClick}
+                >
                   Change Photo
                 </Button>
               </div>
@@ -89,6 +129,11 @@ const Profile = () => {
                   value={formData.phone}
                   onChange={handleChange}
                 />
+                {!formData.phone && (
+                  <p className="text-xs text-muted-foreground">
+                    No phone number provided
+                  </p>
+                )}
               </div>
             </div>
           </form>
