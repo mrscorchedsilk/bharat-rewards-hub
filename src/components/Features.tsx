@@ -80,7 +80,7 @@ const Features = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-bharat-50/30 relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-b from-background to-primary/10 relative overflow-hidden">
       {/* Premium Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Navbar />
       
       <main>
@@ -17,7 +17,7 @@ const Index = () => {
         <Pricing />
         
         {/* How It Works Section */}
-        <section className="py-20 bg-gradient-to-b from-bharat-50/30 to-white">
+        <section className="py-20 bg-gradient-to-b from-background to-primary/10">
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
@@ -87,7 +87,7 @@ const Index = () => {
         </section>
         
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-bharat-700 to-bharat-900 text-white">
+        <section className="py-20 bg-gradient-to-r from-primary to-secondary text-white">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-balance">
@@ -123,7 +123,7 @@ const Index = () => {
         </section>
         
         {/* Footer */}
-        <footer className="bg-gray-50 py-12">
+        <footer className="bg-background py-12 border-t border-primary/10">
           <div className="container mx-auto px-4 md:px-6">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <div className="mb-6 md:mb-0">

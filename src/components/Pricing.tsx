@@ -165,7 +165,7 @@ const PricingCard = ({
 
 const Pricing = () => {
   return (
-    <section id="pricing" className="py-20 bg-gray-50 relative overflow-hidden">
+    <section id="pricing" className="py-20 bg-gradient-to-b from-primary/5 to-background relative overflow-hidden">
       {/* Premium Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
