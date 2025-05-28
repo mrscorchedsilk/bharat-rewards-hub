@@ -1,194 +1,301 @@
 
 import React from "react";
+import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
+import { Users, Target, Award, Heart, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { ArrowRight, Star, Heart, ShieldCheck, Users } from "lucide-react";
 
 const About = () => {
-  const coreValues = [
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
+  const values = [
     {
-      icon: Star,
-      title: "Excellence",
-      description: "We strive to deliver the highest quality in everything we do, from customer service to product selection."
-    },
-    {
-      icon: Heart,
-      title: "Member-First",
-      description: "Our members are at the heart of every decision we make. Your satisfaction is our top priority."
-    },
-    {
-      icon: ShieldCheck,
-      title: "Transparency",
-      description: "We believe in complete transparency in our pricing, policies, and communications."
+      icon: Target,
+      title: "Mission Driven",
+      description: "We believe in empowering Indians with better shopping experiences and maximum savings."
     },
     {
       icon: Users,
-      title: "Community",
-      description: "We build a vibrant community of like-minded members who share and benefit together."
+      title: "Community First",
+      description: "Building a strong community of savvy shoppers who help each other save money."
+    },
+    {
+      icon: Award,
+      title: "Quality Excellence",
+      description: "Partnering only with trusted brands and ensuring the highest quality standards."
+    },
+    {
+      icon: Heart,
+      title: "Customer Care",
+      description: "Your satisfaction and savings are at the heart of everything we do."
     }
   ];
 
-  const milestones = [
-    { year: "2020", title: "The Beginning", description: "Bharat Rewards was founded with a vision to create a rewards program that truly benefits Indian consumers." },
-    { year: "2021", title: "First 1,000 Members", description: "Reached our first milestone of 1,000 active members, validating our member-first approach." },
-    { year: "2022", title: "Bharat Power+ Launch", description: "Launched our unique bulk buying program, allowing members to access premium products at wholesale prices." },
-    { year: "2023", title: "National Expansion", description: "Expanded operations across India, partnering with major retailers and brands." },
-    { year: "2024", title: "18,000+ Members", description: "Grew our community to over 18,000 active members, with significant cashback and savings milestones." }
-  ];
-
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Navbar />
       
       <main className="pt-24 pb-16">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-bharat-700 to-bharat-900 py-16 text-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-3xl md:text-5xl font-bold mb-6">
-                About Bharat Rewards
-              </h1>
-              <p className="text-lg md:text-xl mb-8 opacity-90">
-                We're on a mission to help every Indian consumer save more and get more value through the power of community.
-              </p>
-            </div>
+        <section className="bg-gradient-to-br from-background via-primary/5 to-secondary/5 py-16 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(56,189,248,0.1),transparent_70%)]"></div>
+          <div className="container mx-auto px-4 md:px-6 relative">
+            <motion.div 
+              className="max-w-4xl mx-auto text-center"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.h1 
+                className="text-4xl md:text-6xl font-bold mb-6 glow-text animate-pulse-glow"
+                initial={{ scale: 0.8 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent">
+                  About Bharat Rewards
+                </span>
+              </motion.h1>
+              <motion.p 
+                className="text-lg md:text-xl mb-8 text-muted-foreground"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+              >
+                Empowering millions of Indians to save more while shopping for what they love
+              </motion.p>
+            </motion.div>
           </div>
         </section>
 
-        {/* Our Story Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold mb-8 text-center">Our Story</h2>
-              <div className="prose prose-lg max-w-none">
-                <p>
-                  Bharat Rewards began with a simple question: why aren't Indian consumers getting the same level of rewards and benefits that are standard in other countries? We saw a gap in the market – while Indians are some of the most value-conscious shoppers in the world, the existing rewards programs weren't delivering true value.
-                </p>
-                <p>
-                  Founded in 2020, we set out to create a rewards ecosystem that would genuinely benefit members through multiple avenues – cashback on everyday purchases, discounted gift cards, and most uniquely, our collective buying power program that gives members access to premium products at wholesale prices.
-                </p>
-                <p>
-                  What makes us different is our commitment to passing maximum value to our members. While traditional programs keep most of the benefits, we operate on razor-thin margins, ensuring that our members receive the lion's share of the value we create through our partnerships and negotiations.
-                </p>
-                <p>
-                  Today, with over 18,000 active members and growing daily, Bharat Rewards has become India's fastest-growing rewards club. But we're just getting started on our mission to revolutionize how Indians shop and save.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Core Values */}
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold mb-12 text-center">Our Core Values</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {coreValues.map((value, index) => (
-                  <div key={index} className="flex items-start">
-                    <div className="mr-4">
-                      <div className="p-3 bg-bharat-100 rounded-lg">
-                        <value.icon className="h-6 w-6 text-bharat-600" />
-                      </div>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">{value.title}</h3>
-                      <p className="text-gray-600">{value.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Founder Story */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8">
-                <h2 className="text-3xl font-bold mb-6">Founder's Story</h2>
-                <div className="flex flex-col md:flex-row gap-8">
-                  <div className="md:w-1/3">
-                    <div className="aspect-square bg-gray-200 rounded-xl overflow-hidden">
-                      <img 
-                        src="https://images.unsplash.com/photo-1624797432677-6f803a98acb3?auto=format&fit=crop&q=80&w=300&h=300" 
-                        alt="Founder"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
-                  <div className="md:w-2/3">
-                    <h3 className="text-xl font-bold mb-2">Raj Sharma</h3>
-                    <p className="text-gray-600 mb-1">Founder & CEO</p>
-                    <div className="prose">
-                      <p>
-                        As someone who grew up in a middle-class family in a small town in India, I always understood the value of money and the importance of making every rupee count. After spending several years working in tech companies and seeing the rewards ecosystems in other countries, I was struck by how Indian consumers weren't getting similar benefits.
-                      </p>
-                      <p>
-                        The turning point came when I organized a group buy for premium electronics among friends and family. By pooling our orders, we secured a 25% discount from the distributor. That's when I realized the untapped potential of collective buying power in India.
-                      </p>
-                      <p>
-                        I founded Bharat Rewards with the vision of creating a platform where every Indian consumer could access better deals through collective action. What started as a simple WhatsApp group has now grown into a nationwide community with thousands of members who save money every day through our platform.
-                      </p>
-                      <p>
-                        My promise to our members remains the same: we will always put your interests first and work tirelessly to deliver exceptional value in everything we do.
-                      </p>
-                    </div>
+        {/* Story Section */}
+        <section className="py-16 bg-background relative">
+          <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_49%,rgba(56,189,248,0.05)_50%,transparent_51%)]"></div>
+          <div className="container mx-auto px-4 md:px-6 relative">
+            <motion.div 
+              className="max-w-6xl mx-auto"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <motion.div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center" variants={itemVariants}>
+                <div>
+                  <motion.h2 
+                    className="text-3xl md:text-4xl font-bold mb-6 glow-text"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                      Our Story
+                    </span>
+                  </motion.h2>
+                  <div className="space-y-4 text-muted-foreground">
+                    <p>
+                      Bharat Rewards was born from a simple idea: every Indian deserves access to better deals and exclusive savings when shopping online.
+                    </p>
+                    <p>
+                      Founded by a team of passionate entrepreneurs who understood the challenges of finding genuine deals in the crowded e-commerce space, we set out to create a platform that truly puts the customer first.
+                    </p>
+                    <p>
+                      Today, we're proud to serve thousands of members across India, helping them save money while shopping from their favorite brands.
+                    </p>
                   </div>
                 </div>
-              </div>
-            </div>
+                <motion.div 
+                  className="glass-card p-8 neon-border"
+                  whileHover={{ y: -5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="space-y-6">
+                    <div className="text-center">
+                      <motion.div 
+                        className="text-4xl font-bold glow-text mb-2"
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                          10,000+
+                        </span>
+                      </motion.div>
+                      <p className="text-muted-foreground">Happy Members</p>
+                    </div>
+                    <div className="text-center">
+                      <motion.div 
+                        className="text-4xl font-bold glow-text mb-2"
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent">
+                          ₹50L+
+                        </span>
+                      </motion.div>
+                      <p className="text-muted-foreground">Total Savings Generated</p>
+                    </div>
+                    <div className="text-center">
+                      <motion.div 
+                        className="text-4xl font-bold glow-text mb-2"
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-accent to-primary">
+                          100+
+                        </span>
+                      </motion.div>
+                      <p className="text-muted-foreground">Partner Brands</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
-        {/* Milestones */}
-        <section className="py-16 bg-gray-50">
+        {/* Values Section */}
+        <section className="py-16 bg-gradient-to-r from-background to-primary/5">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold mb-12 text-center">Our Journey</h2>
-              <div className="relative">
-                <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-bharat-200"></div>
-                <div className="space-y-12">
-                  {milestones.map((milestone, index) => (
-                    <div key={index} className={`relative flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
-                      <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full border-4 border-white bg-bharat-500"></div>
-                      <div className={`w-5/12 ${index % 2 === 0 ? 'text-right pr-8' : 'pl-8'}`}>
-                        <div className="inline-block bg-bharat-600 text-white px-3 py-1 rounded mb-2">
-                          {milestone.year}
+            <motion.div 
+              className="max-w-6xl mx-auto"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <motion.div className="text-center mb-12" variants={itemVariants}>
+                <motion.h2 
+                  className="text-3xl md:text-4xl font-bold mb-4 glow-text"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                    Our Values
+                  </span>
+                </motion.h2>
+                <p className="text-lg text-muted-foreground">
+                  The principles that guide everything we do
+                </p>
+              </motion.div>
+
+              <motion.div 
+                className="grid grid-cols-1 md:grid-cols-2 gap-8"
+                variants={containerVariants}
+              >
+                {values.map((value, index) => (
+                  <motion.div
+                    key={value.title}
+                    variants={itemVariants}
+                    whileHover={{ y: -5, scale: 1.02 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Card className="glass-card border-primary/20 hover:shadow-neon transition-all duration-300 neon-border h-full">
+                      <CardHeader>
+                        <div className="flex items-center gap-3">
+                          <motion.div 
+                            className="p-3 rounded-full bg-gradient-to-tr from-primary to-secondary shadow-neon"
+                            whileHover={{ scale: 1.1, rotate: 360 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <value.icon className="h-6 w-6 text-background" />
+                          </motion.div>
+                          <CardTitle className="glow-text">
+                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                              {value.title}
+                            </span>
+                          </CardTitle>
                         </div>
-                        <h3 className="text-xl font-bold mb-2">{milestone.title}</h3>
-                        <p className="text-gray-600">{milestone.description}</p>
-                      </div>
-                      <div className="w-5/12"></div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">{value.description}</p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl font-bold mb-6">Join Our Community</h2>
-              <p className="text-lg mb-8">
-                Be part of India's fastest-growing rewards community and start saving today.
-              </p>
-              <Button 
-                asChild
-                size="lg"
-                className="bg-[#38b6ff] hover:bg-[#38b6ff]/90"
+        <section className="py-16 bg-gradient-to-br from-primary/10 via-background to-secondary/10 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(6,182,212,0.1),transparent_50%)]"></div>
+          <div className="container mx-auto px-4 md:px-6 relative">
+            <motion.div 
+              className="max-w-4xl mx-auto text-center"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.h2 
+                className="text-3xl md:text-4xl font-bold mb-6 glow-text animate-pulse-glow"
+                whileHover={{ scale: 1.02 }}
               >
-                <Link to="/pricing">
-                  Become a Member
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-            </div>
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                  Ready to Start Saving?
+                </span>
+              </motion.h2>
+              <motion.p 
+                className="text-lg mb-8 text-muted-foreground"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+              >
+                Join thousands of smart shoppers who are already saving with Bharat Rewards
+              </motion.p>
+              <motion.div 
+                className="flex flex-col sm:flex-row justify-center gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button 
+                    asChild
+                    size="lg"
+                    className="bg-gradient-to-r from-primary to-secondary text-background glow-button animate-bounce-glow"
+                  >
+                    <Link to="/pricing">
+                      Get Started Today
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                  </Button>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button 
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="border-primary/50 text-primary hover:bg-primary/10 neon-border"
+                  >
+                    <Link to="/rewards">
+                      Explore Rewards
+                    </Link>
+                  </Button>
+                </motion.div>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
       </main>
