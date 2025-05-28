@@ -22,12 +22,17 @@ import TransactionHistory from '@/pages/TransactionHistory';
 const queryClient = new QueryClient();
 
 function App() {
+  React.useEffect(() => {
+    // Set dark mode by default
+    document.documentElement.classList.add('dark');
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <AuthProvider>
           <Router>
-            <div className="min-h-screen bg-white text-gray-900">
+            <div className="min-h-screen bg-background text-foreground">
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/rewards" element={<Rewards />} />

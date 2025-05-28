@@ -75,6 +75,13 @@ export default {
 					'800': '#075985',
 					'900': '#0c4a6e',
 				},
+				neon: {
+					'blue': '#38bdf8',
+					'cyan': '#06b6d4',
+					'teal': '#0891b2',
+					'purple': '#8b5cf6',
+					'pink': '#ec4899',
+				},
 				gold: {
 					'50': '#fffbeb',
 					'100': '#fef3c7',
@@ -130,6 +137,26 @@ export default {
 				  '0%': { backgroundPosition: '-200% 0' },
 				  '100%': { backgroundPosition: '200% 0' },
 				},
+				'pulse-glow': {
+					'0%, 100%': { 
+						textShadow: '0 0 20px rgba(56, 189, 248, 0.8), 0 0 40px rgba(56, 189, 248, 0.6)',
+						transform: 'scale(1)'
+					},
+					'50%': { 
+						textShadow: '0 0 30px rgba(56, 189, 248, 1), 0 0 60px rgba(56, 189, 248, 0.8)',
+						transform: 'scale(1.02)'
+					}
+				},
+				'bounce-glow': {
+					'0%, 100%': { 
+						transform: 'translateY(0)',
+						boxShadow: '0 0 20px rgba(56, 189, 248, 0.6)'
+					},
+					'50%': { 
+						transform: 'translateY(-5px)',
+						boxShadow: '0 5px 25px rgba(56, 189, 248, 0.8)'
+					}
+				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -141,16 +168,21 @@ export default {
 				'float': 'float 6s ease-in-out infinite',
 				'pulse-slow': 'pulse-slow 3s ease-in-out infinite',
 				'shimmer': 'shimmer 2s linear infinite',
+				'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+				'bounce-glow': 'bounce-glow 2s ease-in-out infinite',
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 				'shimmer': 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 25%, rgba(255,255,255,0.2) 75%, rgba(255,255,255,0) 100%)',
+				'neon-gradient': 'linear-gradient(45deg, #38bdf8, #06b6d4, #0891b2)',
 			},
 			boxShadow: {
-				'glass': '0 4px 30px rgba(0, 0, 0, 0.1)',
-				'glass-lg': '0 8px 40px rgba(0, 0, 0, 0.12)',
-				'button': '0 2px 10px rgba(14, 165, 233, 0.15)',
-				'card': '0 4px 20px rgba(0, 0, 0, 0.08)',
+				'glass': '0 4px 30px rgba(0, 0, 0, 0.3)',
+				'glass-lg': '0 8px 40px rgba(0, 0, 0, 0.4)',
+				'button': '0 2px 10px rgba(56, 189, 248, 0.4)',
+				'card': '0 4px 20px rgba(0, 0, 0, 0.3)',
+				'neon': '0 0 20px rgba(56, 189, 248, 0.6), 0 0 40px rgba(56, 189, 248, 0.3)',
+				'neon-lg': '0 0 30px rgba(56, 189, 248, 0.8), 0 0 60px rgba(56, 189, 248, 0.4)',
 			},
 			backdropBlur: {
 				'glass': 'blur(16px)',

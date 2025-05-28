@@ -1,6 +1,6 @@
-
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import { ArrowRight, ShoppingBag, Gift, Users, ExternalLink, BadgePercent } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 
 const Rewards = () => {
   const navigate = useNavigate();
+  
   const cashbackPartners = [
     {
       name: "Amazon",
@@ -93,82 +94,166 @@ const Rewards = () => {
     navigate("/login");
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Navbar />
       
       <main className="pt-24 pb-16">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-bharat-700 to-bharat-900 py-16 text-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-3xl md:text-5xl font-bold mb-6">
-                Unlock Exclusive Rewards with Bharat Rewards
-              </h1>
-              <p className="text-lg md:text-xl mb-8 opacity-90">
-                Earn cashback, access premium gift cards, and join our powerful bulk buying groups
-              </p>
-              <Button 
-                onClick={handleJoinNowClick}
-                size="lg"
-                className="bg-white text-bharat-800 hover:bg-gray-100"
+        <section className="bg-gradient-to-br from-background via-primary/5 to-secondary/5 py-16 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(56,189,248,0.1),transparent_70%)]"></div>
+          <div className="container mx-auto px-4 md:px-6 relative">
+            <motion.div 
+              className="max-w-4xl mx-auto text-center"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.h1 
+                className="text-4xl md:text-6xl font-bold mb-6 glow-text animate-pulse-glow"
+                initial={{ scale: 0.8 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.5 }}
               >
-                Join Now
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </div>
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent">
+                  Unlock Exclusive Rewards
+                </span>
+                <br />
+                <span className="text-foreground">with Bharat Rewards</span>
+              </motion.h1>
+              <motion.p 
+                className="text-lg md:text-xl mb-8 text-muted-foreground"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+              >
+                Earn cashback, access premium gift cards, and join our powerful bulk buying groups
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button 
+                  onClick={handleJoinNowClick}
+                  size="lg"
+                  className="bg-gradient-to-r from-primary to-secondary text-background glow-button animate-bounce-glow hover:shadow-neon-lg"
+                >
+                  Join Now
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
         {/* Cashback Section */}
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-6xl mx-auto">
-              <div className="flex flex-col md:flex-row md:items-center justify-between mb-12">
+        <section className="py-16 bg-background relative">
+          <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_49%,rgba(56,189,248,0.05)_50%,transparent_51%)]"></div>
+          <div className="container mx-auto px-4 md:px-6 relative">
+            <motion.div 
+              className="max-w-6xl mx-auto"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <motion.div 
+                className="flex flex-col md:flex-row md:items-center justify-between mb-12"
+                variants={itemVariants}
+              >
                 <div>
-                  <h2 className="text-3xl font-bold mb-4 flex items-center">
-                    <BadgePercent className="mr-3 h-8 w-8 text-bharat-600" />
-                    Cashback Rewards
-                  </h2>
-                  <p className="text-lg text-gray-600 max-w-2xl">
+                  <motion.h2 
+                    className="text-3xl md:text-4xl font-bold mb-4 flex items-center glow-text"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <BadgePercent className="mr-3 h-8 w-8 text-primary animate-pulse" />
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                      Cashback Rewards
+                    </span>
+                  </motion.h2>
+                  <p className="text-lg text-muted-foreground max-w-2xl">
                     Shop through our partner links and earn cashback on every purchase. The more you shop, the more you earn!
                   </p>
                 </div>
-                <Button asChild className="mt-4 md:mt-0 bg-[#38b6ff] hover:bg-[#38b6ff]/90">
-                  <Link to="/dashboard/cashback">View All Partners</Link>
-                </Button>
-              </div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button asChild className="mt-4 md:mt-0 bg-gradient-to-r from-primary to-secondary text-background glow-button">
+                    <Link to="/dashboard/cashback">View All Partners</Link>
+                  </Button>
+                </motion.div>
+              </motion.div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {cashbackPartners.map((partner) => (
-                  <Card key={partner.name} className="overflow-hidden hover:shadow-md transition-shadow">
-                    <div className="aspect-video relative">
-                      <img 
-                        src={partner.logo} 
-                        alt={partner.name}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-4">
-                        <h3 className="text-white text-xl font-bold">{partner.name}</h3>
+              <motion.div 
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+                variants={containerVariants}
+              >
+                {cashbackPartners.map((partner, index) => (
+                  <motion.div
+                    key={partner.name}
+                    variants={itemVariants}
+                    whileHover={{ y: -5, scale: 1.02 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Card className="overflow-hidden glass-card border-primary/20 hover:shadow-neon transition-all duration-300 neon-border">
+                      <div className="aspect-video relative">
+                        <img 
+                          src={partner.logo} 
+                          alt={partner.name}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent flex flex-col justify-end p-4">
+                          <h3 className="text-primary text-xl font-bold glow-text">{partner.name}</h3>
+                        </div>
                       </div>
-                    </div>
-                    <CardContent className="p-4">
-                      <p className="text-lg font-bold text-green-600 mb-2">{partner.cashbackRate}</p>
-                      <p className="text-sm text-gray-600 mb-4">{partner.description}</p>
-                      <Button className="w-full flex items-center justify-center">
-                        Shop Now
-                        <ExternalLink className="ml-2 h-4 w-4" />
-                      </Button>
-                    </CardContent>
-                  </Card>
+                      <CardContent className="p-4">
+                        <p className="text-lg font-bold text-secondary mb-2 glow-text">{partner.cashbackRate}</p>
+                        <p className="text-sm text-muted-foreground mb-4">{partner.description}</p>
+                        <motion.div
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <Button className="w-full flex items-center justify-center bg-gradient-to-r from-primary/80 to-secondary/80 hover:from-primary hover:to-secondary glow-button">
+                            Shop Now
+                            <ExternalLink className="ml-2 h-4 w-4" />
+                          </Button>
+                        </motion.div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
                 ))}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
         {/* Gift Cards Section */}
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-gradient-to-r from-background to-primary/5">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-6xl mx-auto">
               <div className="flex flex-col md:flex-row md:items-center justify-between mb-12">
@@ -217,7 +302,7 @@ const Rewards = () => {
         </section>
 
         {/* Bulk Buying Section */}
-        <section className="py-16 bg-gray-50">
+        <section className="py-16 bg-background">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-6xl mx-auto">
               <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 mb-12">
@@ -292,35 +377,70 @@ const Rewards = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl font-bold mb-6">Ready to Start Saving?</h2>
-              <p className="text-lg mb-8">
+        <section className="py-16 bg-gradient-to-br from-primary/10 via-background to-secondary/10 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(6,182,212,0.1),transparent_50%)]"></div>
+          <div className="container mx-auto px-4 md:px-6 relative">
+            <motion.div 
+              className="max-w-4xl mx-auto text-center"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.h2 
+                className="text-3xl md:text-4xl font-bold mb-6 glow-text animate-pulse-glow"
+                whileHover={{ scale: 1.02 }}
+              >
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                  Ready to Start Saving?
+                </span>
+              </motion.h2>
+              <motion.p 
+                className="text-lg mb-8 text-muted-foreground"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+              >
                 Join thousands of members who are already enjoying exclusive rewards and discounts.
-              </p>
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Button 
-                  asChild
-                  size="lg"
-                  className="bg-[#38b6ff] hover:bg-[#38b6ff]/90"
+              </motion.p>
+              <motion.div 
+                className="flex flex-col sm:flex-row justify-center gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <Link to="/pricing">
-                    View Membership Options
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-                <Button 
-                  asChild
-                  size="lg"
-                  variant="outline"
+                  <Button 
+                    asChild
+                    size="lg"
+                    className="bg-gradient-to-r from-primary to-secondary text-background glow-button animate-bounce-glow"
+                  >
+                    <Link to="/pricing">
+                      View Membership Options
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                  </Button>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <Link to="/about">
-                    Learn More About Us
-                  </Link>
-                </Button>
-              </div>
-            </div>
+                  <Button 
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="border-primary/50 text-primary hover:bg-primary/10 neon-border"
+                  >
+                    <Link to="/about">
+                      Learn More About Us
+                    </Link>
+                  </Button>
+                </motion.div>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
       </main>

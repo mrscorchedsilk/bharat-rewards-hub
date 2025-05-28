@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { useAuth } from "@/context/AuthContext";
 import { sendOTP, verifyOTP } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
@@ -58,94 +59,160 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="absolute top-4 left-4">
-        <Button variant="ghost" onClick={() => navigate("/")} className="text-gray-600">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Home
-        </Button>
-      </div>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-primary/5 to-secondary/5 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(56,189,248,0.1),transparent_70%)]"></div>
       
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <div className="mx-auto w-12 h-12 rounded-full bg-[#38b6ff] flex items-center justify-center mb-4">
-            <span className="text-white font-bold text-lg">BR</span>
-          </div>
-          <CardTitle className="text-2xl font-bold">Bharat Rewards</CardTitle>
-          <CardDescription>
-            {isOtpSent 
-              ? "Enter the OTP sent to your email"
-              : "Sign in to your account to access exclusive rewards"}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          {!isOtpSent ? (
-            <form onSubmit={handleSendOTP}>
-              <div className="grid gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
+      <motion.div 
+        className="absolute top-4 left-4"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Button variant="ghost" onClick={() => navigate("/")} className="text-muted-foreground hover:text-primary border border-primary/20 hover:bg-primary/10">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Home
+          </Button>
+        </motion.div>
+      </motion.div>
+      
+      <motion.div
+        initial={{ opacity: 0, y: 50, scale: 0.9 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="relative"
+      >
+        <Card className="w-full max-w-md glass-card border-primary/20 shadow-neon backdrop-blur-lg">
+          <CardHeader className="text-center">
+            <motion.div 
+              className="mx-auto w-12 h-12 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center mb-4 shadow-neon"
+              whileHover={{ scale: 1.1, rotate: 360 }}
+              transition={{ duration: 0.3 }}
+            >
+              <span className="text-background font-bold text-lg">BR</span>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary to-secondary animate-pulse-glow opacity-70"></div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+            >
+              <CardTitle className="text-2xl font-bold glow-text">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                  Bharat Rewards
+                </span>
+              </CardTitle>
+              <CardDescription className="text-muted-foreground">
+                {isOtpSent 
+                  ? "Enter the OTP sent to your email"
+                  : "Sign in to your account to access exclusive rewards"}
+              </CardDescription>
+            </motion.div>
+          </CardHeader>
+          <CardContent>
+            {!isOtpSent ? (
+              <motion.form 
+                onSubmit={handleSendOTP}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                <div className="grid gap-4">
+                  <div className="grid gap-2">
+                    <Label htmlFor="email" className="text-foreground">Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="bg-background/50 border-primary/30 focus:border-primary text-foreground placeholder:text-muted-foreground"
+                    />
+                  </div>
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Button 
+                      type="submit" 
+                      className="w-full bg-gradient-to-r from-primary to-secondary text-background glow-button"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? "Sending OTP..." : "Send OTP"}
+                    </Button>
+                  </motion.div>
                 </div>
-                <Button 
-                  type="submit" 
-                  className="w-full bg-[#38b6ff] hover:bg-[#38b6ff]/90"
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Sending OTP..." : "Send OTP"}
-                </Button>
-              </div>
-            </form>
-          ) : (
-            <form onSubmit={handleVerifyOTP}>
-              <div className="grid gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="otp">One-Time Password</Label>
-                  <Input
-                    id="otp"
-                    type="text"
-                    placeholder="Enter 6-digit OTP"
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value)}
-                    maxLength={6}
-                    required
-                  />
-                  <p className="text-xs text-gray-500 mt-1">
-                    We sent a 6-digit code to {email}
-                  </p>
+              </motion.form>
+            ) : (
+              <motion.form 
+                onSubmit={handleVerifyOTP}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 }}
+              >
+                <div className="grid gap-4">
+                  <div className="grid gap-2">
+                    <Label htmlFor="otp" className="text-foreground">One-Time Password</Label>
+                    <Input
+                      id="otp"
+                      type="text"
+                      placeholder="Enter 6-digit OTP"
+                      value={otp}
+                      onChange={(e) => setOtp(e.target.value)}
+                      maxLength={6}
+                      required
+                      className="bg-background/50 border-primary/30 focus:border-primary text-foreground placeholder:text-muted-foreground text-center text-lg tracking-widest"
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">
+                      We sent a 6-digit code to <span className="text-primary">{email}</span>
+                    </p>
+                  </div>
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Button 
+                      type="submit" 
+                      className="w-full bg-gradient-to-r from-primary to-secondary text-background glow-button"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? "Verifying..." : "Verify OTP"}
+                    </Button>
+                  </motion.div>
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Button 
+                      type="button" 
+                      variant="link" 
+                      className="w-full mt-2 text-muted-foreground hover:text-primary"
+                      onClick={() => setIsOtpSent(false)}
+                      disabled={isLoading}
+                    >
+                      Use a different email
+                    </Button>
+                  </motion.div>
                 </div>
-                <Button 
-                  type="submit" 
-                  className="w-full bg-[#38b6ff] hover:bg-[#38b6ff]/90"
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Verifying..." : "Verify OTP"}
-                </Button>
-                <Button 
-                  type="button" 
-                  variant="link" 
-                  className="w-full mt-2"
-                  onClick={() => setIsOtpSent(false)}
-                  disabled={isLoading}
-                >
-                  Use a different email
-                </Button>
-              </div>
-            </form>
-          )}
-        </CardContent>
-        <CardFooter className="flex justify-center">
-          <p className="text-xs text-center text-gray-500">
-            For demo purposes, any 6-digit code will work as a valid OTP
-          </p>
-        </CardFooter>
-      </Card>
+              </motion.form>
+            )}
+          </CardContent>
+          <CardFooter className="flex justify-center">
+            <motion.p 
+              className="text-xs text-center text-muted-foreground"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              For demo purposes, any 6-digit code will work as a valid OTP
+            </motion.p>
+          </CardFooter>
+        </Card>
+      </motion.div>
     </div>
   );
 };
