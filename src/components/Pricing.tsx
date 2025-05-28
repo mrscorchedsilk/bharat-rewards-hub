@@ -30,21 +30,21 @@ const PricingCard = ({
   return (
     <motion.div
       className="group relative"
-      initial={{ opacity: 0, y: 30, scale: 0.95 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       transition={{ 
-        duration: 0.6, 
+        duration: 0.4, 
         delay: index * 0.1,
-        ease: [0.22, 1, 0.36, 1]
+        ease: [0.25, 0.46, 0.45, 0.94]
       }}
       viewport={{ once: true }}
     >
       {isPopular && (
         <motion.div
           className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20"
-          initial={{ opacity: 0, scale: 0 }}
+          initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
+          transition={{ delay: 0.3 + index * 0.1, duration: 0.3 }}
           viewport={{ once: true }}
         >
           <span className={`bg-gradient-to-r ${gradients[index]} text-white px-4 py-1 rounded-full text-sm font-medium shadow-lg`}>
@@ -54,48 +54,25 @@ const PricingCard = ({
       )}
 
       <motion.div
-        className={`flex flex-col p-6 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 relative overflow-hidden ${
+        className={`flex flex-col p-6 bg-white rounded-2xl shadow-lg border border-gray-100 transition-all duration-200 relative overflow-hidden ${
           isPopular ? 'border-2 border-primary/30' : ''
         }`}
         whileHover={{ 
-          y: -8, 
-          scale: 1.02,
-          boxShadow: "0 0 30px rgba(56, 189, 248, 0.4), 0 0 60px rgba(56, 189, 248, 0.2)"
+          y: -3,
+          transition: { duration: 0.2, ease: "easeOut" }
         }}
-        transition={{ duration: 0.3 }}
+        style={{
+          willChange: 'transform'
+        }}
       >
-        {/* Premium Background Effect */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${gradients[index]} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
-        
-        {/* Floating Particles */}
-        {[...Array(3)].map((_, i) => (
-          <motion.div
-            key={i}
-            className={`absolute w-2 h-2 bg-gradient-to-br ${gradients[index]} opacity-30`}
-            style={{
-              top: `${20 + (i * 25)}%`,
-              right: `${10 + (i * 8)}%`,
-              transform: "rotate(45deg)"
-            }}
-            animate={{
-              y: [-10, 10, -10],
-              x: [-5, 5, -5],
-              rotate: [45, 135, 225, 315, 45],
-              opacity: [0.2, 0.6, 0.2]
-            }}
-            transition={{
-              duration: 4 + (i * 0.5),
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.5
-            }}
-          />
-        ))}
+        {/* Subtle hover background */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${gradients[index]} opacity-0 group-hover:opacity-3 transition-opacity duration-300`} />
 
         <div className="relative z-10">
           <motion.h3 
             className={`text-2xl font-bold bg-gradient-to-r ${gradients[index]} bg-clip-text text-transparent`}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
           >
             {title}
           </motion.h3>
@@ -103,7 +80,8 @@ const PricingCard = ({
           <div className="mt-4 mb-8">
             <motion.p 
               className="text-4xl font-bold"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.2 }}
             >
               ₹{price}
             </motion.p>
@@ -113,7 +91,6 @@ const PricingCard = ({
           <div className="flex-1">
             <motion.p 
               className={`text-lg font-semibold bg-gradient-to-r ${gradients[index]} bg-clip-text text-transparent mb-4`}
-              whileHover={{ scale: 1.05 }}
             >
               {cashback} Cashback
             </motion.p>
@@ -123,14 +100,14 @@ const PricingCard = ({
                 <motion.li 
                   key={featureIndex} 
                   className="flex items-center"
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3 + (featureIndex * 0.1) }}
+                  transition={{ delay: 0.2 + (featureIndex * 0.05), duration: 0.3 }}
                   viewport={{ once: true }}
                 >
                   <motion.div
-                    whileHover={{ scale: 1.2, rotate: 360 }}
-                    transition={{ duration: 0.3 }}
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.2 }}
                   >
                     <Check className="h-5 w-5 text-green-500 mr-2" />
                   </motion.div>
@@ -141,18 +118,15 @@ const PricingCard = ({
           </div>
           
           <motion.div
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
+            transition={{ duration: 0.1 }}
           >
             <Button 
               asChild
-              className={`mt-8 w-full bg-gradient-to-r ${gradients[index]} hover:shadow-2xl transition-all duration-300 relative overflow-hidden group/button`}
+              className={`mt-8 w-full bg-gradient-to-r ${gradients[index]} transition-all duration-200 relative overflow-hidden group/button`}
             >
               <Link to="/dashboard">
-                <motion.div
-                  className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover/button:translate-x-[100%] transition-transform duration-700"
-                  style={{ clipPath: "polygon(0 0, 100% 0, 90% 100%, -10% 100%)" }}
-                />
                 <span className="relative z-10">Get Started</span>
               </Link>
             </Button>
@@ -166,25 +140,23 @@ const PricingCard = ({
 const Pricing = () => {
   return (
     <section id="pricing" className="py-20 bg-gradient-to-b from-primary/5 to-background relative overflow-hidden">
-      {/* Premium Background Effects */}
+      {/* Simplified Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
-          className="absolute top-40 right-40 w-64 h-64 bg-gradient-to-br from-primary/15 via-secondary/10 to-accent/5 rounded-full blur-3xl"
+          className="absolute top-40 right-40 w-48 h-48 bg-gradient-to-br from-primary/10 via-secondary/6 to-accent/4 rounded-full blur-2xl"
           animate={{ 
-            scale: [1, 1.3, 1], 
-            opacity: [0.4, 0.7, 0.4],
-            rotate: [0, 120, 240, 360]
+            scale: [1, 1.2, 1], 
+            opacity: [0.4, 0.6, 0.4]
           }}
-          transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
-          className="absolute bottom-40 left-40 w-80 h-80 bg-gradient-to-tr from-accent/15 via-primary/10 to-secondary/5 rounded-full blur-3xl"
+          className="absolute bottom-40 left-40 w-56 h-56 bg-gradient-to-tr from-accent/10 via-primary/6 to-secondary/4 rounded-full blur-2xl"
           animate={{ 
-            scale: [1.2, 1, 1.2], 
-            opacity: [0.3, 0.6, 0.3],
-            rotate: [360, 240, 120, 0]
+            scale: [1.1, 1, 1.1], 
+            opacity: [0.3, 0.5, 0.3]
           }}
-          transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 
@@ -193,34 +165,25 @@ const Pricing = () => {
           className="text-center max-w-3xl mx-auto mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-4 relative"
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-3xl md:text-4xl font-bold mb-4"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent">
               Choose Your Rewards Package
             </span>
-            <motion.div
-              className="absolute -top-1 -right-6 w-4 h-4 bg-gradient-to-br from-purple-400 to-purple-600"
-              style={{ transform: "rotate(45deg)" }}
-              animate={{
-                rotate: [45, 405],
-                scale: [1, 1.3, 1]
-              }}
-              transition={{ duration: 5, repeat: Infinity }}
-            />
           </motion.h2>
           <motion.p 
             className="text-lg text-gray-600"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
             viewport={{ once: true }}
           >
             Select the perfect plan for your shopping needs

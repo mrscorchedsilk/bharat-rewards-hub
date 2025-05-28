@@ -60,46 +60,43 @@ const Features = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
+        staggerChildren: 0.08,
+        delayChildren: 0.1
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1]
+        duration: 0.4,
+        ease: [0.25, 0.46, 0.45, 0.94]
       }
     }
   };
 
   return (
     <section className="py-20 bg-gradient-to-b from-background to-primary/10 relative overflow-hidden">
-      {/* Premium Background Effects */}
+      {/* Simplified Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
-          className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 rounded-full blur-3xl"
+          className="absolute top-20 right-20 w-48 h-48 bg-gradient-to-br from-primary/8 via-secondary/4 to-accent/6 rounded-full blur-2xl"
           animate={{ 
-            scale: [1, 1.2, 1], 
-            opacity: [0.3, 0.6, 0.3],
-            rotate: [0, 180, 360]
+            scale: [1, 1.1, 1], 
+            opacity: [0.3, 0.5, 0.3]
           }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
-          className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-tr from-secondary/10 via-accent/5 to-primary/10 rounded-full blur-3xl"
+          className="absolute bottom-20 left-20 w-56 h-56 bg-gradient-to-tr from-secondary/8 via-accent/4 to-primary/6 rounded-full blur-2xl"
           animate={{ 
             scale: [1.1, 1, 1.1], 
-            opacity: [0.2, 0.5, 0.2],
-            rotate: [360, 180, 0]
+            opacity: [0.2, 0.4, 0.2]
           }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 
@@ -108,34 +105,25 @@ const Features = () => {
           className="text-center max-w-3xl mx-auto mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-4 text-balance relative"
-            whileInView={{ opacity: 1, scale: 1 }}
-            initial={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-3xl md:text-4xl font-bold mb-4 text-balance"
+            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent">
               Everything You Need in One Rewards Platform
             </span>
-            <motion.div
-              className="absolute -top-2 -right-4 w-4 h-4 bg-gradient-to-br from-amber-400 to-amber-600"
-              style={{ transform: "rotate(45deg)" }}
-              animate={{
-                rotate: [45, 405],
-                scale: [1, 1.2, 1]
-              }}
-              transition={{ duration: 4, repeat: Infinity }}
-            />
           </motion.h2>
           <motion.p 
             className="text-lg text-gray-600"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
             viewport={{ once: true }}
           >
             Bharat Rewards combines cashback, gift cards, and exclusive shopping in one seamless experience.
@@ -156,45 +144,24 @@ const Features = () => {
               className="group relative"
             >
               <motion.div
-                className="glass-card rounded-xl p-6 transition-all duration-300 hover:shadow-card hover:translate-y-[-5px] relative overflow-hidden border border-primary/20"
+                className="glass-card rounded-xl p-6 transition-all duration-200 border border-primary/20"
                 whileHover={{ 
-                  y: -8, 
-                  scale: 1.02,
-                  boxShadow: "0 0 30px rgba(56, 189, 248, 0.4), 0 0 60px rgba(56, 189, 248, 0.2)"
+                  y: -2, 
+                  transition: { duration: 0.2, ease: "easeOut" }
                 }}
-                transition={{ duration: 0.3 }}
+                style={{
+                  willChange: 'transform'
+                }}
               >
-                {/* Premium Background Effect */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+                {/* Subtle hover background */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-3 transition-opacity duration-300 rounded-xl`} />
                 
-                {/* Floating Diamond */}
-                <motion.div
-                  className={`absolute top-3 right-3 w-3 h-3 bg-gradient-to-br ${feature.gradient} opacity-40`}
-                  animate={{
-                    y: [-8, 8, -8],
-                    rotate: [45, 135, 45],
-                    scale: [1, 1.1, 1]
-                  }}
-                  transition={{
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: index * 0.3
-                  }}
-                  style={{ transform: "rotate(45deg)" }}
-                />
-
                 <motion.div 
                   className={`w-12 h-12 rounded-lg ${feature.color} flex items-center justify-center mb-5 relative`}
-                  whileHover={{ scale: 1.1, rotate: 15 }}
-                  transition={{ duration: 0.3 }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <feature.icon className="h-6 w-6" />
-                  <motion.div
-                    className={`absolute inset-0 rounded-lg bg-gradient-to-r ${feature.gradient} opacity-20 blur-lg`}
-                    animate={{ scale: [0.8, 1.2, 0.8], opacity: [0.2, 0.4, 0.2] }}
-                    transition={{ duration: 3, repeat: Infinity, delay: index * 0.5 }}
-                  />
                 </motion.div>
                 
                 <h3 className={`text-xl font-semibold mb-3 bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>

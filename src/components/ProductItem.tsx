@@ -36,7 +36,8 @@ const ProductItem = ({ product }: { product: ProductProps }) => {
 
   return (
     <div 
-      className="glass-card rounded-xl overflow-hidden transition-all duration-300 hover:shadow-card hover:translate-y-[-5px]"
+      className="glass-card rounded-xl overflow-hidden transition-all duration-200 hover:shadow-lg"
+      style={{ willChange: 'transform' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -44,7 +45,8 @@ const ProductItem = ({ product }: { product: ProductProps }) => {
         <img 
           src={product.image} 
           alt={product.name} 
-          className={`w-full h-full object-cover transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
+          className={`w-full h-full object-cover transition-transform duration-300 ${isHovered ? 'scale-105' : 'scale-100'}`}
+          style={{ willChange: 'transform' }}
         />
         {discount > 0 && (
           <div className="absolute top-3 left-3">
@@ -86,7 +88,7 @@ const ProductItem = ({ product }: { product: ProductProps }) => {
         
         <Button 
           onClick={handleAddToCart}
-          className="w-full bg-bharat-600 hover:bg-bharat-700 text-white transition-all duration-300"
+          className="w-full bg-bharat-600 hover:bg-bharat-700 text-white transition-all duration-200"
         >
           <ShoppingCart className="h-4 w-4 mr-2" />
           Add to Cart

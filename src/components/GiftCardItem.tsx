@@ -30,7 +30,8 @@ const GiftCardItem = ({ giftCard }: { giftCard: GiftCardProps }) => {
 
   return (
     <div 
-      className="glass-card rounded-xl overflow-hidden transition-all duration-300 hover:shadow-card hover:translate-y-[-5px]"
+      className="glass-card rounded-xl overflow-hidden transition-all duration-200 hover:shadow-lg"
+      style={{ willChange: 'transform' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -38,7 +39,8 @@ const GiftCardItem = ({ giftCard }: { giftCard: GiftCardProps }) => {
         <img 
           src={giftCard.image} 
           alt={giftCard.name} 
-          className={`w-full h-full object-cover transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
+          className={`w-full h-full object-cover transition-transform duration-300 ${isHovered ? 'scale-105' : 'scale-100'}`}
+          style={{ willChange: 'transform' }}
         />
         <div className="absolute top-3 left-3">
           <Badge className="bg-white/90 text-bharat-700 hover:bg-white/80">
@@ -63,7 +65,7 @@ const GiftCardItem = ({ giftCard }: { giftCard: GiftCardProps }) => {
         
         <Button 
           onClick={handlePurchase}
-          className="w-full bg-bharat-600 hover:bg-bharat-700 text-white transition-all duration-300"
+          className="w-full bg-bharat-600 hover:bg-bharat-700 text-white transition-all duration-200"
         >
           Purchase Now
         </Button>
