@@ -272,7 +272,7 @@ const Dashboard = () => {
                       {!isCollapsed && <ChevronRight className="ml-auto h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />}
                     </Link>
                   </motion.div>
-                </li>
+                </motion.li>
               ))}
             </ul>
           </nav>
