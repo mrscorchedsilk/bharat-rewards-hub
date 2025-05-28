@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Mail, Loader2 } from "lucide-react";
 
 const Login = () => {
   const { isAuthenticated, login } = useAuth();
@@ -60,7 +60,10 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-primary/5 to-secondary/5 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Background Effects */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(56,189,248,0.1),transparent_70%)]"></div>
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       
       <motion.div 
         className="absolute top-4 left-4"
@@ -83,29 +86,28 @@ const Login = () => {
         initial={{ opacity: 0, y: 50, scale: 0.9 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="relative"
+        className="relative z-10"
       >
-        <Card className="w-full max-w-md glass-card border-primary/20 shadow-neon backdrop-blur-lg">
-          <CardHeader className="text-center">
+        <Card className="w-full max-w-md glass-card border-primary/20 backdrop-blur-lg">
+          <CardHeader className="text-center space-y-4">
             <motion.div 
-              className="mx-auto w-12 h-12 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center mb-4 shadow-neon"
-              whileHover={{ scale: 1.1, rotate: 360 }}
+              className="mx-auto w-16 h-16 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-lg"
+              whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.3 }}
             >
-              <span className="text-background font-bold text-lg">BR</span>
-              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary to-secondary animate-pulse-glow opacity-70"></div>
+              <span className="text-background font-bold text-xl">BR</span>
             </motion.div>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              <CardTitle className="text-2xl font-bold glow-text">
+              <CardTitle className="text-3xl font-bold">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
                   Bharat Rewards
                 </span>
               </CardTitle>
-              <CardDescription className="text-muted-foreground">
+              <CardDescription className="text-muted-foreground mt-2">
                 {isOtpSent 
                   ? "Enter the OTP sent to your email"
                   : "Sign in to your account to access exclusive rewards"}
@@ -119,10 +121,14 @@ const Login = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
+                className="space-y-4"
               >
-                <div className="grid gap-4">
-                  <div className="grid gap-2">
-                    <Label htmlFor="email" className="text-foreground">Email</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-foreground">Email</Label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <Mail className="h-5 w-5 text-muted-foreground" />
+                    </div>
                     <Input
                       id="email"
                       type="email"
@@ -130,22 +136,29 @@ const Login = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      className="bg-background/50 border-primary/30 focus:border-primary text-foreground placeholder:text-muted-foreground"
+                      className="pl-10 bg-background/50 border-primary/30 focus:border-primary text-foreground placeholder:text-muted-foreground"
                     />
                   </div>
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Button 
-                      type="submit" 
-                      className="w-full bg-gradient-to-r from-primary to-secondary text-background glow-button"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? "Sending OTP..." : "Send OTP"}
-                    </Button>
-                  </motion.div>
                 </div>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-gradient-to-r from-primary to-secondary text-background font-medium"
+                    disabled={isLoading || !email}
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Sending OTP...
+                      </>
+                    ) : (
+                      "Send OTP"
+                    )}
+                  </Button>
+                </motion.div>
               </motion.form>
             ) : (
               <motion.form 
@@ -153,51 +166,57 @@ const Login = () => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1 }}
+                className="space-y-4"
               >
-                <div className="grid gap-4">
-                  <div className="grid gap-2">
-                    <Label htmlFor="otp" className="text-foreground">One-Time Password</Label>
-                    <Input
-                      id="otp"
-                      type="text"
-                      placeholder="Enter 6-digit OTP"
-                      value={otp}
-                      onChange={(e) => setOtp(e.target.value)}
-                      maxLength={6}
-                      required
-                      className="bg-background/50 border-primary/30 focus:border-primary text-foreground placeholder:text-muted-foreground text-center text-lg tracking-widest"
-                    />
-                    <p className="text-xs text-muted-foreground mt-1">
-                      We sent a 6-digit code to <span className="text-primary">{email}</span>
-                    </p>
-                  </div>
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Button 
-                      type="submit" 
-                      className="w-full bg-gradient-to-r from-primary to-secondary text-background glow-button"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? "Verifying..." : "Verify OTP"}
-                    </Button>
-                  </motion.div>
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Button 
-                      type="button" 
-                      variant="link" 
-                      className="w-full mt-2 text-muted-foreground hover:text-primary"
-                      onClick={() => setIsOtpSent(false)}
-                      disabled={isLoading}
-                    >
-                      Use a different email
-                    </Button>
-                  </motion.div>
+                <div className="space-y-2">
+                  <Label htmlFor="otp" className="text-foreground">One-Time Password</Label>
+                  <Input
+                    id="otp"
+                    type="text"
+                    placeholder="Enter 6-digit OTP"
+                    value={otp}
+                    onChange={(e) => setOtp(e.target.value)}
+                    maxLength={6}
+                    required
+                    className="bg-background/50 border-primary/30 focus:border-primary text-foreground placeholder:text-muted-foreground text-center text-lg tracking-widest"
+                  />
+                  <p className="text-xs text-muted-foreground mt-1">
+                    We sent a 6-digit code to <span className="text-primary">{email}</span>
+                  </p>
                 </div>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-gradient-to-r from-primary to-secondary text-background font-medium"
+                    disabled={isLoading || otp.length !== 6}
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Verifying...
+                      </>
+                    ) : (
+                      "Verify OTP"
+                    )}
+                  </Button>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Button 
+                    type="button" 
+                    variant="link" 
+                    className="w-full mt-2 text-muted-foreground hover:text-primary"
+                    onClick={() => setIsOtpSent(false)}
+                    disabled={isLoading}
+                  >
+                    Use a different email
+                  </Button>
+                </motion.div>
               </motion.form>
             )}
           </CardContent>
