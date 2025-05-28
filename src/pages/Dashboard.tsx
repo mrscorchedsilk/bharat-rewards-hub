@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { Link, Navigate, Outlet, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 import { useAuth } from "@/context/AuthContext";
 import { 
   Gift, 
@@ -18,7 +19,8 @@ import {
   LogOut,
   Award,
   Coins,
-  Trophy
+  Trophy,
+  Sparkles
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -60,7 +62,11 @@ const Dashboard = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-bharat-600"></div>
+        <motion.div 
+          className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary shadow-neon"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+        />
       </div>
     );
   }
@@ -114,33 +120,107 @@ const Dashboard = () => {
     return "home";
   };
 
+  // Diamond component variants
+  const diamondVariants = {
+    hidden: { scale: 0, rotate: 0, opacity: 0 },
+    visible: {
+      scale: 1,
+      rotate: 45,
+      opacity: 0.6,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    },
+    hover: {
+      scale: 1.2,
+      rotate: 225,
+      opacity: 0.8,
+      transition: {
+        duration: 0.3
+      }
+    }
+  };
+
+  const floatingDiamondVariants = {
+    float: {
+      y: [-10, 10, -10],
+      rotate: [45, 90, 45],
+      transition: {
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
-      {/* Removed the header that was causing formatting issues */}
+    <div className="min-h-screen bg-background flex flex-col relative overflow-hidden">
+      {/* Background decorative diamonds */}
+      <motion.div 
+        className="absolute top-20 left-10 w-6 h-6 bg-gradient-to-br from-primary to-secondary opacity-20"
+        variants={floatingDiamondVariants}
+        animate="float"
+        style={{ transform: "rotate(45deg)" }}
+      />
+      <motion.div 
+        className="absolute top-40 right-20 w-4 h-4 bg-gradient-to-br from-secondary to-accent opacity-30"
+        variants={floatingDiamondVariants}
+        animate="float"
+        style={{ transform: "rotate(45deg)" }}
+        transition={{ delay: 1 }}
+      />
+      <motion.div 
+        className="absolute bottom-40 left-20 w-8 h-8 bg-gradient-to-br from-accent to-primary opacity-15"
+        variants={floatingDiamondVariants}
+        animate="float"
+        style={{ transform: "rotate(45deg)" }}
+        transition={{ delay: 2 }}
+      />
       
       <div className="flex flex-1">
         {/* Sidebar */}
-        <aside 
+        <motion.aside 
           className={`fixed lg:relative z-10 ${
             sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-          } transition-transform duration-300 ease-in-out bg-white text-gray-800
-          ${isCollapsed ? "w-20" : "w-64 lg:w-72"} h-screen overflow-y-auto flex flex-col border-r border-gray-200`}
+          } transition-transform duration-300 ease-in-out glass-card border-primary/20
+          ${isCollapsed ? "w-20" : "w-64 lg:w-72"} h-screen overflow-y-auto flex flex-col border-r`}
+          initial={{ x: -100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
         >
           <div className="p-4 flex justify-between items-center">
             {!isCollapsed && (
-              <Link to="/dashboard" className="flex items-center space-x-2">
-                <div className="w-10 h-10 rounded-full bg-[#38b6ff] flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">BR</span>
-                </div>
-                <span className="font-bold text-xl text-[#38b6ff]">Bharat Rewards</span>
-              </Link>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+              >
+                <Link to="/dashboard" className="flex items-center space-x-2">
+                  <motion.div 
+                    className="w-10 h-10 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center shadow-neon"
+                    whileHover={{ scale: 1.1, rotate: 360 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <span className="text-background font-bold text-lg">BR</span>
+                  </motion.div>
+                  <motion.span 
+                    className="font-bold text-xl glow-text"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                      Bharat Rewards
+                    </span>
+                  </motion.span>
+                </Link>
+              </motion.div>
             )}
             {!isMobile && (
               <Button 
                 variant="ghost" 
                 size="icon" 
                 onClick={() => setIsCollapsed(!isCollapsed)}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-muted-foreground hover:text-primary neon-border"
               >
                 {isCollapsed ? <ArrowRight className="h-5 w-5" /> : <ArrowLeft className="h-5 w-5" />}
               </Button>
@@ -157,106 +237,182 @@ const Dashboard = () => {
             )}
           </div>
           
-          <Separator />
+          <Separator className="border-primary/20" />
           
           <nav className="flex-1 py-4 pr-2">
             <ul className="space-y-2 px-2">
               {menuItems.map((item, index) => (
-                <li key={index}>
-                  <Link
-                    to={item.path}
-                    className={`flex items-center py-3 px-4 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors group ${
-                      location.pathname === item.path ? "bg-gray-100 text-primary font-medium" : ""
-                    }`}
+                <motion.li 
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 * index }}
+                >
+                  <motion.div
+                    whileHover={{ x: 5, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <span className={`${isCollapsed ? "mx-auto" : "mr-3"}`}>
-                      {item.icon}
-                    </span>
-                    {!isCollapsed && <span>{item.title}</span>}
-                    {!isCollapsed && <ChevronRight className="ml-auto h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />}
-                  </Link>
+                    <Link
+                      to={item.path}
+                      className={`flex items-center py-3 px-4 rounded-lg hover:bg-primary/10 hover:text-primary transition-colors group relative ${
+                        location.pathname === item.path ? "bg-primary/10 text-primary font-medium shadow-neon" : ""
+                      }`}
+                    >
+                      {location.pathname === item.path && (
+                        <motion.div
+                          className="absolute left-1 top-1/2 w-1 h-6 bg-gradient-to-b from-primary to-secondary rounded-full"
+                          layoutId="activeIndicator"
+                          transition={{ duration: 0.3 }}
+                        />
+                      )}
+                      <span className={`${isCollapsed ? "mx-auto" : "mr-3"}`}>
+                        {item.icon}
+                      </span>
+                      {!isCollapsed && <span>{item.title}</span>}
+                      {!isCollapsed && <ChevronRight className="ml-auto h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />}
+                    </Link>
+                  </motion.div>
                 </li>
               ))}
             </ul>
           </nav>
 
           {/* Rewards Summary Section */}
-          <div className={`px-4 py-3 ${isCollapsed ? 'items-center' : ''}`}>
-            <Separator className="mb-3" />
+          <motion.div 
+            className={`px-4 py-3 ${isCollapsed ? 'items-center' : ''}`}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            <Separator className="mb-3 border-primary/20" />
             
             {!isCollapsed ? (
               <>
-                <h3 className="text-sm font-semibold text-gray-700 mb-3">Your Rewards Summary</h3>
+                <motion.h3 
+                  className="text-sm font-semibold mb-3 glow-text"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                    Your Rewards Summary
+                  </span>
+                </motion.h3>
                 <div className="grid grid-cols-1 gap-2 mb-3">
-                  <div className="bg-[#38b6ff]/5 p-2 rounded-lg">
+                  <motion.div 
+                    className="glass-card p-2 rounded-lg neon-border"
+                    whileHover={{ scale: 1.02 }}
+                  >
                     <div className="flex items-center">
-                      <Award className="h-4 w-4 text-[#38b6ff] mr-2" />
+                      <Award className="h-4 w-4 text-primary mr-2" />
                       <div>
-                        <p className="text-xs text-gray-600">Total Cashback</p>
-                        <p className="text-sm font-bold text-[#38b6ff]">₹{user?.walletBalance.toFixed(2)}</p>
+                        <p className="text-xs text-muted-foreground">Total Cashback</p>
+                        <p className="text-sm font-bold text-primary">₹{user?.walletBalance.toFixed(2)}</p>
                       </div>
+                      <motion.div
+                        className="ml-auto w-3 h-3 bg-gradient-to-br from-primary to-secondary"
+                        variants={diamondVariants}
+                        initial="hidden"
+                        animate="visible"
+                        whileHover="hover"
+                      />
                     </div>
-                  </div>
-                  <div className="bg-gold-50 p-2 rounded-lg">
+                  </motion.div>
+                  <motion.div 
+                    className="glass-card p-2 rounded-lg neon-border"
+                    whileHover={{ scale: 1.02 }}
+                  >
                     <div className="flex items-center">
                       <Coins className="h-4 w-4 text-gold-600 mr-2" />
                       <div>
-                        <p className="text-xs text-gray-600">Reward Points</p>
+                        <p className="text-xs text-muted-foreground">Reward Points</p>
                         <p className="text-sm font-bold text-gold-600">{user?.cashbackPoints} pts</p>
                       </div>
+                      <motion.div
+                        className="ml-auto w-3 h-3 bg-gradient-to-br from-gold-400 to-gold-600"
+                        variants={diamondVariants}
+                        initial="hidden"
+                        animate="visible"
+                        whileHover="hover"
+                      />
                     </div>
-                  </div>
-                  <div className="bg-[#38b6ff]/5 p-2 rounded-lg">
+                  </motion.div>
+                  <motion.div 
+                    className="glass-card p-2 rounded-lg neon-border"
+                    whileHover={{ scale: 1.02 }}
+                  >
                     <div className="flex items-center">
-                      <Trophy className="h-4 w-4 text-[#38b6ff] mr-2" />
+                      <Trophy className="h-4 w-4 text-primary mr-2" />
                       <div>
-                        <p className="text-xs text-gray-600">Giveaway Entries</p>
-                        <p className="text-sm font-bold text-[#38b6ff]">3 active</p>
+                        <p className="text-xs text-muted-foreground">Giveaway Entries</p>
+                        <p className="text-sm font-bold text-primary">3 active</p>
                       </div>
+                      <motion.div
+                        className="ml-auto w-3 h-3 bg-gradient-to-br from-secondary to-accent"
+                        variants={diamondVariants}
+                        initial="hidden"
+                        animate="visible"
+                        whileHover="hover"
+                      />
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
               </>
             ) : (
               <div className="flex flex-col items-center space-y-4 mb-3">
-                <div className="flex flex-col items-center">
-                  <Award className="h-5 w-5 text-[#38b6ff]" />
+                <motion.div 
+                  className="flex flex-col items-center"
+                  whileHover={{ scale: 1.1 }}
+                >
+                  <Award className="h-5 w-5 text-primary" />
                   <p className="text-xs font-semibold mt-1">₹{user?.walletBalance.toFixed(2)}</p>
-                </div>
-                <div className="flex flex-col items-center">
+                </motion.div>
+                <motion.div 
+                  className="flex flex-col items-center"
+                  whileHover={{ scale: 1.1 }}
+                >
                   <Coins className="h-5 w-5 text-gold-600" />
                   <p className="text-xs font-semibold mt-1">{user?.cashbackPoints}</p>
-                </div>
-                <div className="flex flex-col items-center">
-                  <Trophy className="h-5 w-5 text-[#38b6ff]" />
+                </motion.div>
+                <motion.div 
+                  className="flex flex-col items-center"
+                  whileHover={{ scale: 1.1 }}
+                >
+                  <Trophy className="h-5 w-5 text-primary" />
                   <p className="text-xs font-semibold mt-1">3</p>
-                </div>
+                </motion.div>
               </div>
             )}
             
-            <Separator className="mb-3" />
-          </div>
+            <Separator className="mb-3 border-primary/20" />
+          </motion.div>
 
           {/* User Profile Section */}
-          <div className="mt-auto p-4">
+          <motion.div 
+            className="mt-auto p-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
             {!isCollapsed ? (
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-full bg-bharat-100 flex items-center justify-center">
-                  <span className="text-bharat-600 font-medium">
+                <motion.div 
+                  className="w-10 h-10 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center shadow-neon"
+                  whileHover={{ scale: 1.1, rotate: 10 }}
+                >
+                  <span className="text-background font-medium">
                     {user?.email ? user.email.charAt(0).toUpperCase() : "U"}
                   </span>
-                </div>
+                </motion.div>
                 <div className="flex-1">
                   <p className="text-sm font-medium truncate">{user?.name || user?.email}</p>
                   <p className="text-xs text-muted-foreground">Rewards Member</p>
                 </div>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="h-8 w-8">
+                    <Button variant="ghost" size="icon" className="h-8 w-8 neon-border">
                       <ChevronRight className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuContent align="end" className="w-56 glass-card border-primary/20">
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>
@@ -286,13 +442,18 @@ const Dashboard = () => {
               <div className="flex flex-col items-center">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-bharat-100">
-                      <span className="text-bharat-600 font-medium">
-                        {user?.email ? user.email.charAt(0).toUpperCase() : "U"}
-                      </span>
-                    </Button>
+                    <motion.div
+                      whileHover={{ scale: 1.1, rotate: 10 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-gradient-to-r from-primary to-secondary shadow-neon">
+                        <span className="text-background font-medium">
+                          {user?.email ? user.email.charAt(0).toUpperCase() : "U"}
+                        </span>
+                      </Button>
+                    </motion.div>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuContent align="end" className="w-56 glass-card border-primary/20">
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>
@@ -319,26 +480,37 @@ const Dashboard = () => {
                 </DropdownMenu>
               </div>
             )}
-          </div>
-        </aside>
+          </motion.div>
+        </motion.aside>
 
         {/* Mobile menu toggle button */}
         {isMobile && !sidebarOpen && (
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={() => setSidebarOpen(true)}
-            className="fixed top-4 left-4 z-10"
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.3 }}
           >
-            <Menu className="h-5 w-5" />
-          </Button>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={() => setSidebarOpen(true)}
+              className="fixed top-4 left-4 z-10 glass-card neon-border"
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
+          </motion.div>
         )}
 
         {/* Mobile tabs */}
         {isMobile && (
-          <div className="fixed bottom-0 left-0 right-0 z-20 bg-white border-t border-gray-200 py-1 px-2">
+          <motion.div 
+            className="fixed bottom-0 left-0 right-0 z-20 glass-card border-t border-primary/20 py-1 px-2"
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
             <Tabs value={getCurrentTabValue()} className="w-full">
-              <TabsList className="w-full bg-gray-50">
+              <TabsList className="w-full glass-card">
                 <TabsTrigger value="home" asChild className="flex-1">
                   <Link to="/dashboard" className="flex flex-col items-center py-1">
                     <Home className="h-5 w-5" />
@@ -365,14 +537,35 @@ const Dashboard = () => {
                 </TabsTrigger>
               </TabsList>
             </Tabs>
-          </div>
+          </motion.div>
         )}
         
         {/* Main content */}
-        <main className={`flex-1 p-4 md:p-6 lg:p-8 ${isMobile && sidebarOpen ? "opacity-25" : "opacity-100"} transition-opacity
-          ${isMobile ? "pb-20" : ""} overflow-y-auto h-screen`}>
+        <motion.main 
+          className={`flex-1 p-4 md:p-6 lg:p-8 ${isMobile && sidebarOpen ? "opacity-25" : "opacity-100"} transition-opacity
+          ${isMobile ? "pb-20" : ""} overflow-y-auto h-screen relative`}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          {/* Decorative diamonds in main content */}
+          <motion.div 
+            className="absolute top-10 right-10 w-4 h-4 bg-gradient-to-br from-primary to-secondary opacity-30"
+            variants={floatingDiamondVariants}
+            animate="float"
+            style={{ transform: "rotate(45deg)" }}
+            transition={{ delay: 0.5 }}
+          />
+          <motion.div 
+            className="absolute bottom-20 right-20 w-6 h-6 bg-gradient-to-br from-accent to-primary opacity-20"
+            variants={floatingDiamondVariants}
+            animate="float"
+            style={{ transform: "rotate(45deg)" }}
+            transition={{ delay: 1.5 }}
+          />
+          
           <Outlet />
-        </main>
+        </motion.main>
       </div>
     </div>
   );
