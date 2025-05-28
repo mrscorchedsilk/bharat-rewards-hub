@@ -61,7 +61,7 @@ const GiftCardItem = ({ giftCard }: { giftCard: GiftCardProps }) => {
         <div className="flex justify-between items-start gap-2">
           <div className="min-w-0 flex-1">
             <h3 className="font-semibold text-base sm:text-lg text-foreground truncate">{giftCard.name}</h3>
-            <p className="text-xs sm:text-sm text-muted-foreground truncate">{giftCard.provider}</p>
+            <p className="text-xs sm:text-sm text-blue-400 glow-text truncate">{giftCard.provider}</p>
           </div>
           <div className="flex items-center text-base sm:text-lg font-bold text-primary shrink-0">
             <IndianRupee className="h-3 w-3 sm:h-4 sm:w-4" />
@@ -69,7 +69,7 @@ const GiftCardItem = ({ giftCard }: { giftCard: GiftCardProps }) => {
           </div>
         </div>
         
-        <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2 leading-relaxed">
+        <p className="text-xs sm:text-sm text-blue-300 glow-text line-clamp-2 leading-relaxed">
           {giftCard.description}
         </p>
         

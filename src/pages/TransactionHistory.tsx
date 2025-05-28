@@ -62,7 +62,7 @@ const TransactionHistory = () => {
           <div className="flex items-center justify-between">
             <div>
               <CardTitle>Your Transactions</CardTitle>
-              <CardDescription>
+              <CardDescription className="text-blue-400 glow-text">
                 View all your cashback earnings and withdrawals
               </CardDescription>
             </div>
@@ -139,7 +139,7 @@ const TransactionItem = ({ transaction }: { transaction: any }) => {
         
         <div>
           <h3 className="font-medium">{transaction.description}</h3>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-blue-400 glow-text">
             {new Date(transaction.date).toLocaleDateString("en-IN", {
               year: "numeric",
               month: "short",

@@ -53,7 +53,7 @@ const AuthModal = () => {
       <div className="p-6 md:p-8">
         <div className="text-center mb-6">
           <h2 className="text-2xl font-bold text-gray-900">Welcome to Bharat Rewards</h2>
-          <p className="text-gray-600 mt-2">
+          <p className="text-blue-400 glow-text mt-2">
             {step === "email" 
               ? "Enter your email to receive a one-time password" 
               : "Enter the 6-digit OTP sent to your email"}
@@ -98,7 +98,7 @@ const AuthModal = () => {
               )}
             </Button>
 
-            <p className="text-xs text-center text-gray-500 mt-4">
+            <p className="text-xs text-center text-blue-300 glow-text mt-4">
               By continuing, you agree to our Terms of Service and Privacy Policy.
             </p>
           </form>
@@ -116,7 +116,7 @@ const AuthModal = () => {
                 maxLength={6}
                 required
               />
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-blue-400 glow-text">
                 We've sent a code to {email}
               </p>
             </div>
@@ -140,7 +140,7 @@ const AuthModal = () => {
               <button
                 type="button"
                 onClick={() => setStep("email")}
-                className="text-sm text-bharat-600 hover:text-bharat-700"
+                className="text-sm text-blue-400 glow-text hover:text-blue-300"
               >
                 Change email
               </button>

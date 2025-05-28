@@ -74,7 +74,7 @@ const ProductItem = ({ product }: { product: ProductProps }) => {
         <div className="flex justify-between items-start gap-2">
           <div className="min-w-0 flex-1">
             <h3 className="font-semibold text-base sm:text-lg text-foreground truncate">{product.name}</h3>
-            <p className="text-xs sm:text-sm text-muted-foreground truncate">{product.brand}</p>
+            <p className="text-xs sm:text-sm text-blue-400 glow-text truncate">{product.brand}</p>
           </div>
           <div className="flex items-center gap-1 shrink-0">
             <Star className="h-3 w-3 sm:h-4 sm:w-4 fill-gold-500 text-gold-500" />
@@ -82,7 +82,7 @@ const ProductItem = ({ product }: { product: ProductProps }) => {
           </div>
         </div>
         
-        <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2 leading-relaxed">
+        <p className="text-xs sm:text-sm text-blue-300 glow-text line-clamp-2 leading-relaxed">
           {product.description}
         </p>
         
@@ -91,7 +91,7 @@ const ProductItem = ({ product }: { product: ProductProps }) => {
             <IndianRupee className="h-3 w-3 sm:h-4 sm:w-4 text-foreground" />
             <span className="text-base sm:text-lg font-bold text-foreground">{product.price}</span>
             {product.originalPrice && (
-              <span className="text-xs sm:text-sm text-muted-foreground line-through ml-1 sm:ml-2">
+              <span className="text-xs sm:text-sm text-blue-400 glow-text line-through ml-1 sm:ml-2">
                 ₹{product.originalPrice}
               </span>
             )}

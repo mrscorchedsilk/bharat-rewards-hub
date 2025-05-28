@@ -120,7 +120,7 @@ const Features = () => {
             </span>
           </motion.h2>
           <motion.p 
-            className="text-lg text-gray-600"
+            className="text-lg text-blue-400 glow-text"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
@@ -167,7 +167,7 @@ const Features = () => {
                 <h3 className={`text-xl font-semibold mb-3 bg-gradient-to-r ${feature.gradient} bg-clip-text text-transparent`}>
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 relative z-10">{feature.description}</p>
+                <p className="text-blue-300 glow-text relative z-10">{feature.description}</p>
               </motion.div>
             </motion.div>
           ))}
