@@ -253,126 +253,207 @@ const Rewards = () => {
         </section>
 
         {/* Gift Cards Section */}
-        <section className="py-16 bg-gradient-to-r from-background to-primary/5">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-6xl mx-auto">
-              <div className="flex flex-col md:flex-row md:items-center justify-between mb-12">
+        <section className="py-16 bg-gradient-to-r from-background to-primary/5 relative">
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,transparent_49%,rgba(56,189,248,0.05)_50%,transparent_51%)]"></div>
+          <div className="container mx-auto px-4 md:px-6 relative">
+            <motion.div 
+              className="max-w-6xl mx-auto"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <motion.div 
+                className="flex flex-col md:flex-row md:items-center justify-between mb-12"
+                variants={itemVariants}
+              >
                 <div>
-                  <h2 className="text-3xl font-bold mb-4 flex items-center">
-                    <Gift className="mr-3 h-8 w-8 text-red-500" />
-                    Gift Cards
-                  </h2>
-                  <p className="text-lg text-gray-600 max-w-2xl">
+                  <motion.h2 
+                    className="text-3xl md:text-4xl font-bold mb-4 flex items-center glow-text"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <Gift className="mr-3 h-8 w-8 text-secondary animate-pulse" />
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                      Gift Cards
+                    </span>
+                  </motion.h2>
+                  <p className="text-lg text-muted-foreground max-w-2xl">
                     Purchase digital gift cards at special member prices. Perfect for gifts or personal use.
                   </p>
                 </div>
-                <Button asChild className="mt-4 md:mt-0 bg-[#38b6ff] hover:bg-[#38b6ff]/90">
-                  <Link to="/dashboard/gift-cards">Explore Gift Cards</Link>
-                </Button>
-              </div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button asChild className="mt-4 md:mt-0 bg-gradient-to-r from-primary to-secondary text-background glow-button">
+                    <Link to="/dashboard/gift-cards">Explore Gift Cards</Link>
+                  </Button>
+                </motion.div>
+              </motion.div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {giftCards.map((card) => (
-                  <Card key={card.name} className="overflow-hidden hover:shadow-md transition-shadow">
-                    <div className="aspect-video relative">
-                      <img 
-                        src={card.image} 
-                        alt={card.name}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-4">
-                        <h3 className="text-white text-xl font-bold">{card.name}</h3>
+              <motion.div 
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+                variants={containerVariants}
+              >
+                {giftCards.map((card, index) => (
+                  <motion.div
+                    key={card.name}
+                    variants={itemVariants}
+                    whileHover={{ y: -5, scale: 1.02 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Card className="overflow-hidden glass-card border-primary/20 hover:shadow-neon transition-all duration-300 neon-border">
+                      <div className="aspect-video relative">
+                        <img 
+                          src={card.image} 
+                          alt={card.name}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent flex flex-col justify-end p-4">
+                          <h3 className="text-primary text-xl font-bold glow-text">{card.name}</h3>
+                        </div>
                       </div>
-                    </div>
-                    <CardContent className="p-4">
-                      <div className="flex justify-between items-center mb-4">
-                        <p className="text-gray-600">{card.value}</p>
-                        <p className="text-red-500 font-bold">{card.discount}</p>
-                      </div>
-                      <Button className="w-full flex items-center justify-center">
-                        Buy Now
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </CardContent>
-                  </Card>
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-center mb-4">
+                          <p className="text-muted-foreground">{card.value}</p>
+                          <p className="text-secondary font-bold glow-text">{card.discount}</p>
+                        </div>
+                        <motion.div
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <Button className="w-full flex items-center justify-center bg-gradient-to-r from-primary/80 to-secondary/80 hover:from-primary hover:to-secondary glow-button">
+                            Buy Now
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Button>
+                        </motion.div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
                 ))}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
         {/* Bulk Buying Section */}
-        <section className="py-16 bg-background">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-6xl mx-auto">
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 mb-12">
+        <section className="py-16 bg-background relative">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(56,189,248,0.1),transparent_50%)]"></div>
+          <div className="container mx-auto px-4 md:px-6 relative">
+            <motion.div 
+              className="max-w-6xl mx-auto"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <motion.div 
+                className="glass-card rounded-2xl p-8 mb-12 border-primary/20 neon-border bg-gradient-to-br from-primary/5 via-background to-secondary/5"
+                variants={itemVariants}
+                whileHover={{ scale: 1.01 }}
+                transition={{ duration: 0.3 }}
+              >
                 <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6">
                   <div className="flex-1">
-                    <h2 className="text-3xl font-bold mb-4 flex items-center">
-                      <Users className="mr-3 h-8 w-8 text-blue-600" />
-                      Bharat Power+
-                    </h2>
-                    <p className="text-lg mb-4">
+                    <motion.h2 
+                      className="text-3xl md:text-4xl font-bold mb-4 flex items-center glow-text"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <Users className="mr-3 h-8 w-8 text-primary animate-pulse" />
+                      <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                        Bharat Power+
+                      </span>
+                    </motion.h2>
+                    <p className="text-lg mb-4 text-muted-foreground">
                       Our unique bulk buying program that gives you access to premium products at wholesale prices.
                     </p>
                     <div className="space-y-3">
-                      <div className="flex items-start">
-                        <div className="h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center mt-0.5 mr-3">
-                          <span className="text-blue-600 font-bold text-sm">1</span>
+                      <motion.div 
+                        className="flex items-start glass-card p-3 rounded-lg neon-border"
+                        whileHover={{ x: 5, scale: 1.02 }}
+                      >
+                        <div className="h-6 w-6 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mt-0.5 mr-3 shadow-neon">
+                          <span className="text-background font-bold text-sm">1</span>
                         </div>
                         <p>We negotiate on behalf of all members collectively</p>
-                      </div>
-                      <div className="flex items-start">
-                        <div className="h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center mt-0.5 mr-3">
-                          <span className="text-blue-600 font-bold text-sm">2</span>
+                      </motion.div>
+                      <motion.div 
+                        className="flex items-start glass-card p-3 rounded-lg neon-border"
+                        whileHover={{ x: 5, scale: 1.02 }}
+                      >
+                        <div className="h-6 w-6 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mt-0.5 mr-3 shadow-neon">
+                          <span className="text-background font-bold text-sm">2</span>
                         </div>
                         <p>Get bulk discounts on higher quality products</p>
-                      </div>
-                      <div className="flex items-start">
-                        <div className="h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center mt-0.5 mr-3">
-                          <span className="text-blue-600 font-bold text-sm">3</span>
+                      </motion.div>
+                      <motion.div 
+                        className="flex items-start glass-card p-3 rounded-lg neon-border"
+                        whileHover={{ x: 5, scale: 1.02 }}
+                      >
+                        <div className="h-6 w-6 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mt-0.5 mr-3 shadow-neon">
+                          <span className="text-background font-bold text-sm">3</span>
                         </div>
                         <p>We charge as low as 10% margin, passing maximum savings to you</p>
-                      </div>
+                      </motion.div>
                     </div>
                   </div>
                   <div>
-                    <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700">
-                      <Link to="/dashboard/bulk-buying">
-                        Join Bulk Buying Groups
-                        <ArrowRight className="ml-2 h-5 w-5" />
-                      </Link>
-                    </Button>
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Button asChild size="lg" className="bg-gradient-to-r from-primary to-secondary text-background glow-button hover:shadow-neon-lg">
+                        <Link to="/dashboard/bulk-buying">
+                          Join Bulk Buying Groups
+                          <ArrowRight className="ml-2 h-5 w-5" />
+                        </Link>
+                      </Button>
+                    </motion.div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {bulkBuyingCategories.map((category) => (
-                  <Card key={category.name} className="overflow-hidden hover:shadow-md transition-shadow">
-                    <div className="md:flex">
-                      <div className="md:w-1/3">
-                        <img 
-                          src={category.image} 
-                          alt={category.name}
-                          className="h-full w-full object-cover"
-                        />
+              <motion.div 
+                className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                variants={containerVariants}
+              >
+                {bulkBuyingCategories.map((category, index) => (
+                  <motion.div
+                    key={category.name}
+                    variants={itemVariants}
+                    whileHover={{ y: -5, scale: 1.02 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Card className="overflow-hidden glass-card border-primary/20 hover:shadow-neon transition-all duration-300 neon-border">
+                      <div className="md:flex">
+                        <div className="md:w-1/3">
+                          <img 
+                            src={category.image} 
+                            alt={category.name}
+                            className="h-48 md:h-full w-full object-cover"
+                          />
+                        </div>
+                        <div className="md:w-2/3 p-6">
+                          <h3 className="text-xl font-bold mb-2 glow-text">{category.name}</h3>
+                          <p className="text-secondary font-bold mb-2 glow-text">{category.discount}</p>
+                          <p className="text-muted-foreground mb-4">{category.description}</p>
+                          <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                          >
+                            <Button asChild variant="outline" className="w-full neon-border bg-gradient-to-r from-primary/10 to-secondary/10 hover:from-primary/20 hover:to-secondary/20">
+                              <Link to="/dashboard/bulk-buying">
+                                Explore Category
+                              </Link>
+                            </Button>
+                          </motion.div>
+                        </div>
                       </div>
-                      <div className="md:w-2/3 p-4">
-                        <h3 className="text-xl font-bold mb-2">{category.name}</h3>
-                        <p className="text-green-600 font-bold mb-2">{category.discount}</p>
-                        <p className="text-gray-600 mb-4">{category.description}</p>
-                        <Button asChild variant="outline" className="w-full">
-                          <Link to="/dashboard/bulk-buying">
-                            Explore Category
-                          </Link>
-                        </Button>
-                      </div>
-                    </div>
-                  </Card>
+                    </Card>
+                  </motion.div>
                 ))}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
