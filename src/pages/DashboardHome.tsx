@@ -1,4 +1,3 @@
-
 import { useAuth } from "@/context/AuthContext";
 import { motion } from "framer-motion";
 import { Card, CardHeader, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
@@ -256,10 +255,12 @@ const DashboardHome = () => {
                 >
                   <motion.div
                     className="absolute top-2 right-2 w-4 h-4 bg-gradient-to-br opacity-60"
-                    style={{ background: `linear-gradient(to bottom right, ${stat.gradient.split(' ')[0].slice(5)}, ${stat.gradient.split(' ')[2]})` }}
+                    style={{ 
+                      background: `linear-gradient(to bottom right, ${stat.gradient.split(' ')[0].slice(5)}, ${stat.gradient.split(' ')[2]})`,
+                      transform: "rotate(45deg)"
+                    }}
                     variants={diamondVariants}
                     animate="float"
-                    style={{ transform: "rotate(45deg)" }}
                     transition={{ delay: index * 0.5 }}
                   />
                   
