@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { IndianRupee, ShoppingCart, Star } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { toast } from "sonner";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export interface ProductProps {
   id: string;
@@ -21,6 +22,7 @@ export interface ProductProps {
 const ProductItem = ({ product }: { product: ProductProps }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { isAuthenticated } = useAuth();
+  const isMobile = useIsMobile();
 
   const discount = product.originalPrice 
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
@@ -36,61 +38,74 @@ const ProductItem = ({ product }: { product: ProductProps }) => {
 
   return (
     <div 
-      className="glass-card rounded-xl overflow-hidden transition-all duration-200 hover:shadow-lg"
-      style={{ willChange: 'transform' }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className={`glass-card rounded-xl overflow-hidden transition-all duration-300 ease-out
+        ${isMobile 
+          ? 'active:scale-95 active:shadow-md' 
+          : 'hover:scale-102 hover:shadow-lg hover:-translate-y-1'
+        } will-change-transform`}
+      onMouseEnter={() => !isMobile && setIsHovered(true)}
+      onMouseLeave={() => !isMobile && setIsHovered(false)}
+      onTouchStart={() => isMobile && setIsHovered(true)}
+      onTouchEnd={() => isMobile && setIsHovered(false)}
     >
       <div className="relative aspect-square overflow-hidden">
         <img 
           src={product.image} 
           alt={product.name} 
-          className={`w-full h-full object-cover transition-transform duration-300 ${isHovered ? 'scale-105' : 'scale-100'}`}
-          style={{ willChange: 'transform' }}
+          className={`w-full h-full object-cover transition-transform duration-500 ease-out will-change-transform
+            ${isHovered ? 'scale-105' : 'scale-100'}`}
+          loading="lazy"
         />
         {discount > 0 && (
-          <div className="absolute top-3 left-3">
-            <Badge className="bg-red-500 text-white hover:bg-red-600">
+          <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
+            <Badge className="bg-red-500 text-white hover:bg-red-600 text-xs sm:text-sm font-medium shadow-sm">
               {discount}% OFF
             </Badge>
           </div>
         )}
-        <div className="absolute top-3 right-3">
-          <Badge className="bg-green-500 text-white hover:bg-green-600">
+        <div className="absolute top-2 right-2 sm:top-3 sm:right-3">
+          <Badge className="bg-green-500 text-white hover:bg-green-600 text-xs sm:text-sm font-medium shadow-sm">
             {product.cashback}% Cashback
           </Badge>
         </div>
       </div>
       
-      <div className="p-5">
-        <div className="flex justify-between items-start mb-2">
-          <div>
-            <h3 className="font-semibold text-lg">{product.name}</h3>
-            <p className="text-sm text-muted-foreground">{product.brand}</p>
+      <div className="p-3 sm:p-5 space-y-3 sm:space-y-4">
+        <div className="flex justify-between items-start gap-2">
+          <div className="min-w-0 flex-1">
+            <h3 className="font-semibold text-base sm:text-lg text-foreground truncate">{product.name}</h3>
+            <p className="text-xs sm:text-sm text-muted-foreground truncate">{product.brand}</p>
           </div>
-          <div className="flex items-center">
-            <Star className="h-4 w-4 fill-gold-500 text-gold-500 mr-1" />
-            <span className="text-sm font-medium">{product.rating}</span>
+          <div className="flex items-center gap-1 shrink-0">
+            <Star className="h-3 w-3 sm:h-4 sm:w-4 fill-gold-500 text-gold-500" />
+            <span className="text-xs sm:text-sm font-medium text-foreground">{product.rating}</span>
           </div>
         </div>
         
-        <p className="text-sm text-gray-600 mb-4 line-clamp-2">{product.description}</p>
+        <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2 leading-relaxed">
+          {product.description}
+        </p>
         
-        <div className="flex justify-between items-center mb-4">
-          <div className="flex items-center">
-            <IndianRupee className="h-4 w-4" />
-            <span className="text-lg font-bold">{product.price}</span>
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-1">
+            <IndianRupee className="h-3 w-3 sm:h-4 sm:w-4 text-foreground" />
+            <span className="text-base sm:text-lg font-bold text-foreground">{product.price}</span>
             {product.originalPrice && (
-              <span className="text-sm text-gray-500 line-through ml-2">₹{product.originalPrice}</span>
+              <span className="text-xs sm:text-sm text-muted-foreground line-through ml-1 sm:ml-2">
+                ₹{product.originalPrice}
+              </span>
             )}
           </div>
         </div>
         
         <Button 
           onClick={handleAddToCart}
-          className="w-full bg-bharat-600 hover:bg-bharat-700 text-white transition-all duration-200"
+          className={`w-full bg-bharat-600 hover:bg-bharat-700 text-white font-medium
+            transition-all duration-200 ease-out shadow-sm hover:shadow-md
+            ${isMobile ? 'h-11 text-sm' : 'h-10 text-sm'}
+            active:scale-98 focus:ring-2 focus:ring-bharat-500 focus:ring-offset-2`}
         >
-          <ShoppingCart className="h-4 w-4 mr-2" />
+          <ShoppingCart className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
           Add to Cart
         </Button>
       </div>
