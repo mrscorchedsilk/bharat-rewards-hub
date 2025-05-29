@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { IndianRupee, ShoppingCart, Star } from "lucide-react";
@@ -24,17 +24,36 @@ const ProductItem = ({ product }: { product: ProductProps }) => {
   const { isAuthenticated } = useAuth();
   const isMobile = useIsMobile();
 
-  const discount = product.originalPrice 
-    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
-    : 0;
+  const discount = useMemo(() => 
+    product.originalPrice 
+      ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+      : 0,
+    [product.originalPrice, product.price]
+  );
 
-  const handleAddToCart = () => {
+  const handleAddToCart = useCallback(() => {
     if (isAuthenticated) {
       toast.success(`${product.name} added to cart`);
     } else {
       toast.error("Please login to add items to cart");
     }
-  };
+  }, [isAuthenticated, product.name]);
+
+  const handleMouseEnter = useCallback(() => {
+    if (!isMobile) setIsHovered(true);
+  }, [isMobile]);
+
+  const handleMouseLeave = useCallback(() => {
+    if (!isMobile) setIsHovered(false);
+  }, [isMobile]);
+
+  const handleTouchStart = useCallback(() => {
+    if (isMobile) setIsHovered(true);
+  }, [isMobile]);
+
+  const handleTouchEnd = useCallback(() => {
+    if (isMobile) setIsHovered(false);
+  }, [isMobile]);
 
   return (
     <div 
@@ -43,10 +62,10 @@ const ProductItem = ({ product }: { product: ProductProps }) => {
           ? 'active:scale-95 active:shadow-md' 
           : 'hover:scale-102 hover:shadow-lg hover:-translate-y-1'
         } will-change-transform`}
-      onMouseEnter={() => !isMobile && setIsHovered(true)}
-      onMouseLeave={() => !isMobile && setIsHovered(false)}
-      onTouchStart={() => isMobile && setIsHovered(true)}
-      onTouchEnd={() => isMobile && setIsHovered(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       <div className="relative aspect-square overflow-hidden">
         <img 
