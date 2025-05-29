@@ -4,7 +4,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ArrowDownLeft, ArrowUpRight, Calendar, Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/context/AuthContext";
 
 // Mock transaction data
 const transactions = [
@@ -51,8 +50,6 @@ const transactions = [
 ];
 
 const TransactionHistory = () => {
-  const { user } = useAuth();
-
   return (
     <div className="container max-w-4xl mx-auto py-6">
       <h1 className="text-2xl font-bold mb-6">Transaction History</h1>
