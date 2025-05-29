@@ -1,3 +1,4 @@
+
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -20,11 +21,11 @@ const Hero = () => {
                 </span>
               </div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-balance fade-in-delay-1">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-balance fade-in-delay-1 text-foreground">
                 India's Fastest Growing <span className="text-[#38b6ff]">Rewards Club</span>
               </h1>
               
-              <p className="text-lg text-gray-600 fade-in-delay-2">
+              <p className="text-lg text-blue-300 glow-text fade-in-delay-2">
                 Join Bharat Rewards and earn cashback on every purchase. Redeem your points for gift cards, products, or cash transfers directly to your UPI.
               </p>
             </div>
@@ -54,8 +55,8 @@ const Hero = () => {
             </div>
             
             <div className="pt-6 fade-in-delay-3">
-              <div className="text-sm text-gray-600">
-                <span className="font-semibold text-gray-900">18,000+</span> members already joined
+              <div className="text-sm text-blue-300 glow-text">
+                <span className="font-semibold text-blue-200 glow-text">18,000+</span> members already joined
               </div>
             </div>
           </div>
@@ -70,11 +71,11 @@ const Hero = () => {
                     <h3 className="text-lg font-semibold text-bharat-800">Your Rewards Dashboard</h3>
                     <div className="mt-3 grid grid-cols-2 gap-3">
                       <div className="bg-bharat-50 rounded-lg p-3">
-                        <p className="text-xs text-bharat-600 font-medium">Available Balance</p>
+                        <p className="text-xs text-blue-400 glow-text font-medium">Available Balance</p>
                         <p className="text-xl font-bold text-bharat-900">₹4,250</p>
                       </div>
                       <div className="bg-gold-50 rounded-lg p-3">
-                        <p className="text-xs text-gold-600 font-medium">Cashback Points</p>
+                        <p className="text-xs text-blue-400 glow-text font-medium">Cashback Points</p>
                         <p className="text-xl font-bold text-gold-800">128</p>
                       </div>
                     </div>
@@ -87,8 +88,8 @@ const Hero = () => {
                       </div>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500">Cashback</p>
-                      <p className="text-sm font-semibold">Up to 10%</p>
+                      <p className="text-xs text-blue-300 glow-text">Cashback</p>
+                      <p className="text-sm font-semibold text-foreground">Up to 10%</p>
                     </div>
                   </div>
                   
@@ -99,8 +100,8 @@ const Hero = () => {
                       </div>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500">Withdraw</p>
-                      <p className="text-sm font-semibold">Instant to UPI</p>
+                      <p className="text-xs text-blue-300 glow-text">Withdraw</p>
+                      <p className="text-sm font-semibold text-foreground">Instant to UPI</p>
                     </div>
                   </div>
                 </div>
@@ -118,8 +119,8 @@ const Hero = () => {
                     ].map((item, idx) => (
                       <div key={idx} className="flex justify-between items-center py-1">
                         <div>
-                          <p className="text-sm font-medium">{item.title}</p>
-                          <p className="text-xs text-gray-500">{item.date}</p>
+                          <p className="text-sm font-medium text-foreground">{item.title}</p>
+                          <p className="text-xs text-blue-300 glow-text">{item.date}</p>
                         </div>
                         <p className="text-sm font-semibold text-green-600">+{item.amount}</p>
                       </div>

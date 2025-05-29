@@ -79,13 +79,13 @@ const PricingCard = ({
           
           <div className="mt-4 mb-8">
             <motion.p 
-              className="text-4xl font-bold"
+              className="text-4xl font-bold text-foreground"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
               ₹{price}
             </motion.p>
-            <p className="text-gray-500">{duration}</p>
+            <p className="text-blue-300 glow-text">{duration}</p>
           </div>
           
           <div className="flex-1">
@@ -111,7 +111,7 @@ const PricingCard = ({
                   >
                     <Check className="h-5 w-5 text-green-500 mr-2" />
                   </motion.div>
-                  <span>{feature}</span>
+                  <span className="text-blue-300 glow-text">{feature}</span>
                 </motion.li>
               ))}
             </ul>
@@ -169,7 +169,7 @@ const Pricing = () => {
           viewport={{ once: true }}
         >
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-4"
+            className="text-3xl md:text-4xl font-bold mb-4 text-foreground"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -180,7 +180,7 @@ const Pricing = () => {
             </span>
           </motion.h2>
           <motion.p 
-            className="text-lg text-gray-600"
+            className="text-lg text-blue-300 glow-text"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
