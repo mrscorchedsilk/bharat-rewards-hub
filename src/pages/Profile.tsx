@@ -12,7 +12,7 @@ const Profile = () => {
   const [formData, setFormData] = useState({
     name: user?.name || "",
     email: user?.email || "",
-    phone: user?.phoneNumber || "", // Fixed property name to match user type
+    phone: user?.phoneNumber || "",
   });
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -24,12 +24,10 @@ const Profile = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, you would update the user profile in your backend
     toast.success("Profile updated successfully!");
   };
 
   const handlePhotoClick = () => {
-    // Trigger file input click when the "Change Photo" button is clicked
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
