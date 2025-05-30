@@ -17,7 +17,7 @@ const Hero = () => {
             <div className="space-y-4 max-w-xl">
               <div className="inline-block">
                 <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-[#38b6ff]/10 text-[#38b6ff] slide-up">
-                  Introducing Bharat Rewards - 18,000+ Members joined today
+                  Introducing Bharat Rewards - 35,000+ Members joined already!
                 </span>
               </div>
               
@@ -56,7 +56,7 @@ const Hero = () => {
             
             <div className="pt-6 fade-in-delay-3">
               <div className="text-sm text-blue-300 glow-text">
-                <span className="font-semibold text-blue-200 glow-text">18,000+</span> members already joined
+                <span className="font-semibold text-blue-200 glow-text">35,000+</span> members already joined
               </div>
             </div>
           </div>

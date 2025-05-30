@@ -140,7 +140,7 @@ const Navbar = () => {
                 onClick={() => navigate("/login")}
                 className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-background shadow-neon text-sm lg:text-base px-4 lg:px-6"
               >
-                Sign In
+                Join Now
               </Button>
             )}
           </div>
@@ -207,7 +207,7 @@ const Navbar = () => {
                     onClick={() => navigate("/login")}
                     className="w-full bg-gradient-to-r from-primary to-secondary text-background glow-button h-11"
                   >
-                    Sign In
+                    Join Now
                   </Button>
                 )}
                 
