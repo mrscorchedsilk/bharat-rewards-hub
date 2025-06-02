@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -264,7 +265,7 @@ export function AuthPopup({ isOpen, onClose }: AuthPopupProps) {
 
           <TabsContent value="signin">
             {step === 1 && (
-              <form onSubmit={(e) => { e.preventDefault(); handleSignin(); }} className="space-y-4">
+              <form onSubmit={handleSignin} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="signin-email">Email</Label>
                   <Input
