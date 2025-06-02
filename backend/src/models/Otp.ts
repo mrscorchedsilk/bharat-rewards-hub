@@ -2,7 +2,7 @@ import { DataTypes, Model } from 'sequelize';
 import sequelize from '../config/database';
 
 interface OtpAttributes {
-  id: number;
+  id?: number;
   email: string;
   otp: string;
   expiresAt: Date;

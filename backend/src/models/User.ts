@@ -2,7 +2,7 @@ import { DataTypes, Model } from 'sequelize';
 import sequelize from '../config/database';
 
 interface UserAttributes {
-  id: number;
+  id?: number;
   email: string;
   password: string;
   firstName: string;
