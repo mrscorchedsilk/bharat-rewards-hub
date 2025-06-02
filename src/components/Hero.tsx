@@ -36,7 +36,7 @@ const Hero = () => {
                 size="lg" 
                 className="bg-[#38b6ff] hover:bg-[#38b6ff]/90 text-white shadow-button transition-all duration-300 hover:shadow-lg hover:translate-y-[-2px]"
               >
-                <Link to="/dashboard">
+                <Link to="/signup">
                   Join Now
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>

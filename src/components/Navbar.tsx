@@ -137,7 +137,7 @@ const Navbar = () => {
               </DropdownMenu>
             ) : (
               <Button 
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/signup")}
                 className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-background shadow-neon text-sm lg:text-base px-4 lg:px-6"
               >
                 Join Now
@@ -204,7 +204,7 @@ const Navbar = () => {
                 
                 {!isAuthenticated && (
                   <Button 
-                    onClick={() => navigate("/login")}
+                    onClick={() => navigate("/signup")}
                     className="w-full bg-gradient-to-r from-primary to-secondary text-background glow-button h-11"
                   >
                     Join Now

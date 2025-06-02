@@ -12,6 +12,7 @@ import Pricing from '@/pages/Pricing';
 import About from '@/pages/About';
 import FAQs from '@/pages/FAQs';
 import Login from '@/pages/Login';
+import SignUp from '@/pages/SignUp';
 import Dashboard from '@/pages/Dashboard';
 import DashboardHome from '@/pages/DashboardHome';
 import Cashback from '@/pages/Cashback';
@@ -40,6 +41,7 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/faqs" element={<FAQs />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
                 <Route path="/dashboard" element={<Dashboard />}>
                   <Route index element={<DashboardHome />} />
                   <Route path="cashback" element={<Cashback />} />
