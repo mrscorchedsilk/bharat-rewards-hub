@@ -1,24 +1,24 @@
-
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import React, { useEffect } from 'react';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
+import { SignupForm } from '@/components/SignupForm';
 import { AuthProvider } from "@/context/AuthContext";
-import Index from '@/pages/Index';
-import Rewards from '@/pages/Rewards';
-import Pricing from '@/pages/Pricing';
 import About from '@/pages/About';
-import FAQs from '@/pages/FAQs';
-import Login from '@/pages/Login';
-import SignUp from '@/pages/SignUp';
+import Cashback from '@/pages/Cashback';
 import Dashboard from '@/pages/Dashboard';
 import DashboardHome from '@/pages/DashboardHome';
-import Cashback from '@/pages/Cashback';
+import FAQs from '@/pages/FAQs';
 import Giveaways from '@/pages/Giveaways';
+import Index from '@/pages/Index';
+import Login from '@/pages/Login';
+import Pricing from '@/pages/Pricing';
 import Profile from '@/pages/Profile';
+import Rewards from '@/pages/Rewards';
 import TransactionHistory from '@/pages/TransactionHistory';
+import VerifyEmail from '@/pages/VerifyEmail';
 
 const queryClient = new QueryClient();
 
@@ -41,7 +41,8 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/faqs" element={<FAQs />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
+                <Route path="/signup" element={<SignupForm />} />
+                <Route path="/verify-email" element={<VerifyEmail />} />
                 <Route path="/dashboard" element={<Dashboard />}>
                   <Route index element={<DashboardHome />} />
                   <Route path="cashback" element={<Cashback />} />

@@ -253,7 +253,7 @@ const Rewards = () => {
         </section>
 
         {/* Gift Cards Section */}
-        <section className="py-16 bg-gradient-to-r from-background to-primary/5 relative">
+        {/* <section className="py-16 bg-gradient-to-r from-background to-primary/5 relative">
           <div className="absolute inset-0 bg-[linear-gradient(135deg,transparent_49%,rgba(56,189,248,0.05)_50%,transparent_51%)]"></div>
           <div className="container mx-auto px-4 md:px-6 relative">
             <motion.div 
@@ -334,7 +334,7 @@ const Rewards = () => {
               </motion.div>
             </motion.div>
           </div>
-        </section>
+        </section> */}
 
         {/* Bulk Buying Section */}
         <section className="py-16 bg-background relative">
