@@ -148,7 +148,7 @@ export function AuthPopup({ isOpen, onClose }: AuthPopupProps) {
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Welcome to Bharat Rewards Hub</DialogTitle>
@@ -305,4 +305,4 @@ export function AuthPopup({ isOpen, onClose }: AuthPopupProps) {
       </DialogContent>
     </Dialog>
   );
-} 
+}
