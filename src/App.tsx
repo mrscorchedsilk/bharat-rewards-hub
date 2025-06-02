@@ -1,10 +1,10 @@
+
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React, { useEffect } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
-import { SignupForm } from '@/components/SignupForm';
 import { AuthProvider } from "@/context/AuthContext";
 import About from '@/pages/About';
 import Cashback from '@/pages/Cashback';
@@ -17,6 +17,7 @@ import Login from '@/pages/Login';
 import Pricing from '@/pages/Pricing';
 import Profile from '@/pages/Profile';
 import Rewards from '@/pages/Rewards';
+import SignUp from '@/pages/SignUp';
 import TransactionHistory from '@/pages/TransactionHistory';
 import VerifyEmail from '@/pages/VerifyEmail';
 
@@ -41,7 +42,7 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/faqs" element={<FAQs />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignupForm />} />
+                <Route path="/signup" element={<SignUp />} />
                 <Route path="/verify-email" element={<VerifyEmail />} />
                 <Route path="/dashboard" element={<Dashboard />}>
                   <Route index element={<DashboardHome />} />
