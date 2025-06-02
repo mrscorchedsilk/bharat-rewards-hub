@@ -5,7 +5,7 @@ import { Op } from 'sequelize';
 import { sendVerificationEmail } from '../config/email';
 import Otp from '../models/Otp';
 import User from '../models/User';
-import { generateToken } from '../utils/token';
+import { generateToken, verifyUser } from '../utils/token';
 
 // Send OTP
 export const sendOtp = async (req: Request, res: Response) => {
@@ -99,11 +99,7 @@ export const signup = async (req: Request, res: Response) => {
     });
 
     // Generate JWT token
-    const token = jwt.sign(
-      { userId: user.id },
-      process.env.JWT_SECRET || 'your-secret-key',
-      { expiresIn: '24h' }
-    );
+    const token = generateToken(user.id);
 
     res.status(201).json({
       message: 'User created successfully',
@@ -145,11 +141,7 @@ export const signin = async (req: Request, res: Response) => {
     await otpRecord.destroy();
 
     // Generate JWT token
-    const token = jwt.sign(
-      { userId: user.id },
-      process.env.JWT_SECRET || 'your-secret-key',
-      { expiresIn: '24h' }
-    );
+    const token = generateToken(user.id);
 
     res.status(200).json({
       message: 'Login successful',
